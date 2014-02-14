@@ -1,0 +1,59 @@
+﻿@using System.Web.UI.WebControls
+@model MeetingPlanner.Models.MeetingModel
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model != null)
+{
+    @Html.HiddenFor(m => m.MeetingId);
+    <div class="edit-main-content">
+        <div>
+            @if (Model.OwnerName == User.Identity.Name)
+            {
+                <div>Скопируйте ссылку, отправьте другу, чтобы он смог поучавствовать в планировании встречи<br>
+                    @Html.TextBox("MeetingLink", Model.MeetingLink)
+                </div>
+            }
+        </div>
+        <div class="edit-description">
+            <h3>
+            Пользователь с ником @Model.OwnerName запланировал встречу "@Model.Description"  <br>
+            Пожалуйста выберите удобные и неудобные для вас дни.
+            </h3>
+        </div>
+        <div class="edit-radiobuttons">
+            <div>
+                @Html.RadioButton("avaliableDates", 1, true, new {id = "avaliableDates"})
+                <label for="avaliableDates">Я могу</label>
+            </div>
+            <div>
+                @Html.RadioButton("avaliableDates", 2, new {id = "nopossibleDates"})
+                <label for="nopossibleDates">Я занят(а)</label>
+            </div>
+        </div>
+        <div class="edit-buttons">
+            @if (Model.OwnerName == User.Identity.Name)
+            {
+                <input type="button" value="Расчитать" onclick="selector.sendForCount()"/>
+            }
+            <input id="sendButton" type="button" value="Отправить" onclick="selector.sendClicked()"/>
+        </div>
+    </div>
+    <div id="calendar"></div>
+    <div id ="resultLink">
+        <p>Чтобы перейти к результатам нажмите на кнопку</p>
+        <input type="button" value="Кнопка" onclick="selector.gotoResult()">
+    </div>
+
+    <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.js")"></script>
+    <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/calendar-selector.js")"></script>
+    <script src="@Url.Content("~/Scripts/fullcalendar/gcal.js")"></script>
+    <link href=@Url.Content("~/Scripts/fullcalendar/fullcalendar.css") rel="stylesheet"/>
+    <link href=@Url.Content("~/Scripts/fullcalendar/fullcalendar.print.css") rel="stylesheet"/>
+}
+else
+{
+    <p>Простите, но такой встречи никто не планирует</p>
+}
