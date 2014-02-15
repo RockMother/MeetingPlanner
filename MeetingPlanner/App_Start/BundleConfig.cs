@@ -27,15 +27,13 @@ namespace MeetingPlanner
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
-
-            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/site.css",
                 "~/Content/bootstrap/bootstrap-theme.css",
                 "~/Content/bootstrap/bootstrap-theme.min.css",
                 "~/Content/bootstrap/bootstrap.css",
                 "~/Content/bootstrap/bootstrap.min.css"
                 ));
-
         }
     }
 }
