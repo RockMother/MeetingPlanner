@@ -91,11 +91,11 @@ $(document).ready(function () {
 
     $('#calendar').fullCalendar({
         editable: true,
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },        selectable: true,
+        //header: {
+        //    left: 'prev,next today',
+        //    center: 'title',
+        //    //right: 'month,agendaWeek,agendaDay'
+        //},        selectable: true,
         height: 320,
         width: 480,
         dayClick: selector.dayClicked,

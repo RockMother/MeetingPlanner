@@ -20,23 +20,25 @@
         
             <h4>Пожалуйста выберите удобные и неудобные для вас дни, после чего нажмите кнопку отправить</h4>
         </div>
-        <div class="btn-group" id="radioButtons" style="padding-top: 30px" data-toggle="buttons">
-            <label class="btn btn-default">
-                <input type="radio" id="nonavaliable" name="days" value="0">Неудобно
-            </label>
-            <label class="btn btn-default active">
-                <input type="radio" id="avaliable" name="days" value="1" checked="">Удобно
-            </label>
-        </div>
-        <div  style="float: right">
-            @if (Model.IsOwner)
-            {
-                <button class="btn btn-primary" onclick="selector.sendForCount()">Расчитать</button>
-            }
-            <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">Отправить</button>
+        <div class="container" style="padding-top: 30px">
+            <div class="btn-group float-left" id="radioButtons" data-toggle="buttons">
+                <label class="btn btn-default">
+                    <input type="radio" id="nonavaliable" name="days" value="0">Неудобно
+                </label>
+                <label class="btn btn-default active">
+                    <input type="radio" id="avaliable" name="days" value="1" checked="">Удобно
+                </label>
+            </div>
+            <div  class="float-right">
+                @if (Model.IsOwner)
+                {
+                    <button class="btn btn-primary" onclick="selector.sendForCount()">Расчитать</button>
+                }
+                <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">Отправить</button>
+            </div>
         </div>
     </div>
-    <div id="calendar" style="padding-top: 30px"></div>
+    <div id="calendar" style="padding-top: 10px"></div>
     <div id ="resultLink" style="text-align: center; display: none">
         <button class="btn btn-default" onclick="selector.gotoResult()">Перейти к результатам</button>
     </div>
