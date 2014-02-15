@@ -88,30 +88,23 @@ calendarSelector = function () {
 
 $(document).ready(function () {
     selector = new calendarSelector();
-
+    debugger;
     $('#calendar').fullCalendar({
         editable: true,
         //header: {
         //    left: 'prev,next today',
         //    center: 'title',
         //    //right: 'month,agendaWeek,agendaDay'
-        //},        selectable: true,
+        //},
+        selectable: true,
         height: 320,
         width: 480,
         dayClick: selector.dayClicked,
-        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-        monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
-        dayNames: ['Воскресенье', 'понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-        dayNamesShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-        buttonText: {
-            prev: "<span class='fc-text-arrow'>&lsaquo;</span>",
-            next: "<span class='fc-text-arrow'>&rsaquo;</span>",
-            prevYear: "<span class='fc-text-arrow'>&laquo;</span>",
-            nextYear: "<span class='fc-text-arrow'>&raquo;</span>",
-            today: 'Сегодня',
-            month: 'Месяц',
-            week: 'Неделя',
-            day: 'День'
-        },
+        
+        monthNames: fullCalendarLocalizedDefaults.monthNames,
+        monthNamesShort: fullCalendarLocalizedDefaults.monthNamesShort,
+        dayNames: fullCalendarLocalizedDefaults.dayNames,
+        dayNamesShort: fullCalendarLocalizedDefaults.dayNamesShort,
+        buttonText: fullCalendarLocalizedDefaults.buttonText
     });
 });

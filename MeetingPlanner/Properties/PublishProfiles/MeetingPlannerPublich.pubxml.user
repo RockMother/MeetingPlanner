@@ -93,7 +93,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:45:43</publishTime>
     </File>
     <File Include="bin/MeetingPlanner.dll">
-      <publishTime>02/15/2014 16:56:44</publishTime>
+      <publishTime>02/15/2014 21:09:19</publishTime>
     </File>
     <File Include="bin/Microsoft.Data.Edm.dll">
       <publishTime>02/15/2014 00:45:02</publishTime>
@@ -112,6 +112,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>02/15/2014 00:45:31</publishTime>
+    </File>
+    <File Include="bin/ru/MeetingPlanner.resources.dll">
+      <publishTime>02/15/2014 21:09:19</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
       <publishTime>02/15/2014 00:45:03</publishTime>
@@ -426,13 +429,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 16:50:32</publishTime>
     </File>
     <File Include="Scripts/calendar-selector.js">
-      <publishTime>02/15/2014 16:50:32</publishTime>
+      <publishTime>02/15/2014 21:08:56</publishTime>
+    </File>
+    <File Include="Scripts/fullcalendar-localization/fullcalendar-titles.en.js">
+      <publishTime>02/15/2014 21:07:29</publishTime>
+    </File>
+    <File Include="Scripts/fullcalendar-localization/fullcalendar-titles.ru.js">
+      <publishTime>02/15/2014 21:07:27</publishTime>
     </File>
     <File Include="Scripts/fullcalendar/fullcalendar.css">
       <publishTime>02/15/2014 00:44:02</publishTime>
     </File>
     <File Include="Scripts/fullcalendar/fullcalendar.js">
-      <publishTime>02/15/2014 00:44:02</publishTime>
+      <publishTime>02/15/2014 21:01:30</publishTime>
     </File>
     <File Include="Scripts/fullcalendar/fullcalendar.min.js">
       <publishTime>02/15/2014 00:44:02</publishTime>
@@ -513,25 +522,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:44:05</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>02/15/2014 16:50:32</publishTime>
+      <publishTime>02/15/2014 20:07:13</publishTime>
     </File>
     <File Include="Views/Meeting/Edit.cshtml">
-      <publishTime>02/15/2014 16:50:32</publishTime>
+      <publishTime>02/15/2014 21:00:11</publishTime>
     </File>
     <File Include="Views/Meeting/New.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Views/Result/Index.cshtml">
-      <publishTime>02/15/2014 16:50:32</publishTime>
+      <publishTime>02/15/2014 20:19:53</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/15/2014 17:12:37</publishTime>
+      <publishTime>02/15/2014 20:02:06</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>02/15/2014 00:44:06</publishTime>
+      <publishTime>02/15/2014 18:12:05</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>02/15/2014 00:44:06</publishTime>
@@ -540,7 +549,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/15/2014 17:13:34</publishTime>
+      <publishTime>02/15/2014 21:19:07</publishTime>
     </File>
   </ItemGroup>
 </Project>

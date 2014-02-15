@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using MeetingPlanner.Resources.Views.Meeting
 @model MeetingPlanner.Models.MeetingModel
 @{
     ViewBag.Title = @Model.Description;
@@ -11,38 +12,41 @@
         <div style="text-align: center">
             @if (Model.IsOwner)
             {
-                <h4>Отправьте другим участникам номер встречи, чтобы они могли присоединиться к планированию - @Model.MeetingId</h4>
+                <h4>@Edit.SendNumerToFriends - @Model.MeetingId</h4>
             }
             else
             {
-                <h4>Кто-то из ваших друзей запланировал встречу "@Model.Description" </h4>
+                <h4>@Edit.SomeBodeCreatesMeeting "@Model.Description" </h4>
             }
         
-            <h4>Пожалуйста выберите удобные и неудобные для вас дни, после чего нажмите кнопку отправить</h4>
+            <h4>@Edit.PleaseSelectDays</h4>
         </div>
         <div class="container" style="padding-top: 30px">
             <div class="btn-group float-left" id="radioButtons" data-toggle="buttons">
                 <label class="btn btn-default">
-                    <input type="radio" id="nonavaliable" name="days" value="0">Неудобно
+                    <input type="radio" id="nonavaliable" name="days" value="0">@Edit.Inconvenient
                 </label>
                 <label class="btn btn-default active">
-                    <input type="radio" id="avaliable" name="days" value="1" checked="">Удобно
+                    <input type="radio" id="avaliable" name="days" value="1" checked="">@Edit.Convenient
                 </label>
             </div>
             <div  class="float-right">
                 @if (Model.IsOwner)
                 {
-                    <button class="btn btn-primary" onclick="selector.sendForCount()">Расчитать</button>
+                    <button class="btn btn-primary" onclick="selector.sendForCount()">@Edit.CountButton</button>
                 }
-                <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">Отправить</button>
+                <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">@Edit.SendButton</button>
             </div>
         </div>
     </div>
     <div id="calendar" style="padding-top: 10px"></div>
     <div id ="resultLink" style="text-align: center; display: none">
-        <button class="btn btn-default" onclick="selector.gotoResult()">Перейти к результатам</button>
+        <button class="btn btn-default" onclick="selector.gotoResult()">@Edit.GoToResult</button>
     </div>
 
+    
+    var fileName = "~/Scripts/fullcalendar-localization/fullcalendar-titles." + Culture.Substring(0, 2) + ".js";
+    <script src="@Url.Content(fileName)"></script>
     <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.js")"></script>
     <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.min.js")"></script>
     <script src="@Url.Content("~/Scripts/calendar-selector.js")"></script>
@@ -52,5 +56,5 @@
 }
 else
 {
-    <h3>Простите, но такой встречи никто не планирует</h3>
+    <h3>@Edit.SorryNoMeeting</h3>
 }

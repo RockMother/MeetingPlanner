@@ -1,4 +1,5 @@
-﻿
+﻿@using MeetingPlanner.Resources.Views.Home
+
 
 @{
     ViewBag.Title = "Home Page";
@@ -6,22 +7,22 @@
 }
 <div class="container">
 
-    <h1>Добро пожаловать в планировщик встреч.</h1>
-    <p>Данное приложение позволит вам и вашим друзьям выбрать наиболее удобный день для встречи.</p>
+    <h1>@Index.WelcomeHeader</h1>
+    <p>@Index.Description</p>
 
 </div>
 <!-- Button trigger modal -->
 <div class="container-fluid">
     <div style="float: left" >
-        <h4>Вы можете создать новую встречу</h4>
+        <h4>@Index.CreateNewMeeting</h4>
         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-            Создать встречу
+            @Index.CreateMeetingButton
         </button>
     </div>
     <div style="float: left; margin-left: 30px" >
-        <h4>или присоединиться к существующей</h4>
-        <input type="text" id="meetingNumber" class="input-sm" placeholder="Номер встречи">
-        <button  class="btn btn-primary btn-sm" onclick="homePageJoinClicked()">Присоединиться</button>
+        <h4>@Index.OrJoinExists</h4>
+        <input type="text" id="meetingNumber" class="input-sm" placeholder="@Index.MeetingNumberPlaceholder">
+        <button  class="btn btn-primary btn-sm" onclick="homePageJoinClicked()">@Index.JoinMeetingButton</button>
     </div>
 </div>
 <!-- Modal -->
@@ -30,15 +31,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Создание встречи</h4>
+                <h4 class="modal-title" id="myModalLabel">@Index.CreateMeetingModalTitle</h4>
             </div>
             <div class="modal-body">
-                <label for="meetingDescription" class="control-label">Введите описание встречи: </label>
+                <label for="meetingDescription" class="control-label">@Index.InputMeetingDescription </label>
                 <input type="text" class="input-sm" style="width: 100%" id="meetingDescription">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" onclick="homePageCreateMeetengClicked()">Создать</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Index.CancelButton</button>
+                <button type="button" class="btn btn-primary" onclick="homePageCreateMeetengClicked()">@Index.CreateButton</button>
             </div>
         </div>
     </div>

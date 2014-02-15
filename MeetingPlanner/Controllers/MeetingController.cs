@@ -14,7 +14,7 @@ using UserProfile = DataAccess.UserProfile;
 
 namespace MeetingPlanner.Controllers
 {
-    public class MeetingController : Controller
+    public class MeetingController : BaseController
     {
         //
         // GET: /Meeting/

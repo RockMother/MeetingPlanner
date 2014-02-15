@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using DataAccess;
 using MeetingPlanner.Enums;
+using MeetingPlanner.Resources.Controllers.Result;
 
 namespace MeetingPlanner.Controllers
 {
-    public class ResultController : Controller
+    public class ResultController : BaseController
     {
         public ActionResult Index(int? id)
         {
@@ -20,8 +21,7 @@ namespace MeetingPlanner.Controllers
                 {
                     if (meeting.MeetingStatusId == (int) MeetingStatusEnum.Open)
                     {
-                        message =
-                            "Пожалуйста, обновите страницу позже, результат появится, когда создатель встречи отправит запрос на расчет";
+                        message = Strings.PleaseReloadLater;
                     }
                     else if (meeting.MeetingStatusId == (int) MeetingStatusEnum.Closed)
                     {
@@ -48,8 +48,7 @@ namespace MeetingPlanner.Controllers
                                 finalDate = pair.Key;
                             }
                         }
-                        message = string.Format("Предлагаю встретится {0}, это устроит большинство.",
-                                                finalDate.ToShortDateString());
+                        message = string.Format(Strings.CountResult, finalDate.ToShortDateString());
                     }
                 }
             }

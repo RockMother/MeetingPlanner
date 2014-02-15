@@ -1,8 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using MeetingPlanner.Resources.Views.Shared
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - Планировщик встречи</title>
+        <title>@ViewBag.Title - @_Layout.MeetingPlanner</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
@@ -32,12 +33,24 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="@Url.Action("Index", "Home")">Планировщик встреч</a>
+              <a class="navbar-brand" href="@Url.Action("Index", "Home")">@_Layout.MeetingPlanner</a>
           </div>
-@*        <div class="navbar-collapse collapse">
+          <div class="navbar-collapse collapse">
+              <div class="btn-group btn-lg navbar-right">
+                  <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
+                      @_Layout.Lang <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                      @{ var controller = @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(); }
+                      <li>@Html.ActionLink("English", "ChangeCulture", controller, new { lang = "en", returnUrl = Request.RawUrl }, null)</li>
+                      <li>@Html.ActionLink("Русский", "ChangeCulture", controller, new { lang = "ru", returnUrl = Request.RawUrl }, null)</li>
+                  </ul>
+              </div>
+          </div>
+              @*        <div class="navbar-collapse collapse">
             @Html.Partial("_LoginPartial")
         </div><!--/.navbar-collapse -->*@
-      </div>
+          </div>
     </div>
 
         <div class="container">
