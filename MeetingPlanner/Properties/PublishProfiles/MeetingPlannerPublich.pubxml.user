@@ -15,7 +15,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:45:51</publishTime>
     </File>
     <File Include="bin/DataAccess.dll">
-      <publishTime>02/15/2014 02:02:53</publishTime>
+      <publishTime>02/15/2014 16:24:42</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>02/15/2014 00:45:00</publishTime>
@@ -93,7 +93,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:45:43</publishTime>
     </File>
     <File Include="bin/MeetingPlanner.dll">
-      <publishTime>02/15/2014 03:19:27</publishTime>
+      <publishTime>02/15/2014 16:46:52</publishTime>
     </File>
     <File Include="bin/Microsoft.Data.Edm.dll">
       <publishTime>02/15/2014 00:45:02</publishTime>
@@ -184,6 +184,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/zh-Hant/System.Spatial.resources.dll">
       <publishTime>02/15/2014 00:45:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap-theme.css">
+      <publishTime>02/15/2014 16:34:45</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap-theme.css.map">
+      <publishTime>02/13/2014 09:24:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap-theme.min.css">
+      <publishTime>02/15/2014 16:34:59</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap.css">
+      <publishTime>02/15/2014 16:35:07</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap.css.map">
+      <publishTime>02/13/2014 09:24:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap.min.css">
+      <publishTime>02/15/2014 16:35:20</publishTime>
     </File>
     <File Include="Content/Home.css">
       <publishTime>02/15/2014 00:43:47</publishTime>
@@ -401,8 +419,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="packages.config">
       <publishTime>02/15/2014 00:43:59</publishTime>
     </File>
+    <File Include="Scripts/bootstrap/bootstrap.js">
+      <publishTime>02/15/2014 16:32:33</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/bootstrap.min.js">
+      <publishTime>02/15/2014 16:32:44</publishTime>
+    </File>
     <File Include="Scripts/calendar-selector.js">
-      <publishTime>02/15/2014 00:44:02</publishTime>
+      <publishTime>02/15/2014 16:22:38</publishTime>
     </File>
     <File Include="Scripts/fullcalendar/fullcalendar.css">
       <publishTime>02/15/2014 00:44:02</publishTime>
@@ -489,22 +513,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:44:05</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>02/15/2014 00:44:05</publishTime>
+      <publishTime>02/15/2014 15:43:30</publishTime>
     </File>
     <File Include="Views/Meeting/Edit.cshtml">
-      <publishTime>02/15/2014 00:44:06</publishTime>
+      <publishTime>02/15/2014 15:46:20</publishTime>
     </File>
     <File Include="Views/Meeting/New.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Views/Result/Index.cshtml">
-      <publishTime>02/15/2014 00:44:06</publishTime>
+      <publishTime>02/15/2014 15:36:18</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/15/2014 00:44:06</publishTime>
+      <publishTime>02/15/2014 16:46:48</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
@@ -516,7 +540,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/15/2014 03:19:32</publishTime>
+      <publishTime>02/15/2014 16:47:12</publishTime>
     </File>
   </ItemGroup>
 </Project>
