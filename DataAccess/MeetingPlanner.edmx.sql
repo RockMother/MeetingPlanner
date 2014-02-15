@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/13/2014 12:53:14
+-- Date Created: 02/15/2014 11:41:01
 -- Generated from EDMX file: C:\Projects\MeetingPlanner\DataAccess\MeetingPlanner.edmx
 -- --------------------------------------------------
 
@@ -82,7 +82,7 @@ GO
 CREATE TABLE [dbo].[MeetingSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [MeetingStatusId] int  NOT NULL,
-    [UserProfileId] int  NOT NULL,
+    [UserProfileId] int  NULL,
     [Description] nvarchar(max)  NOT NULL
 );
 GO
@@ -108,7 +108,7 @@ CREATE TABLE [dbo].[UserMeetingDatesSet] (
     [Date] datetime  NOT NULL,
     [MeetingId] int  NOT NULL,
     [IsAvaliable] bit  NOT NULL,
-    [UserProfileId] int  NOT NULL
+    [UserProfileId] int  NULL
 );
 GO
 
@@ -282,34 +282,6 @@ ADD CONSTRAINT [FK_webpages_UsersInRoles_UserProfile]
 CREATE INDEX [IX_FK_webpages_UsersInRoles_UserProfile]
 ON [dbo].[webpages_UsersInRoles]
     ([UserProfiles_Id]);
-GO
-
--- Creating foreign key on [UserProfileId] in table 'MeetingSet'
-ALTER TABLE [dbo].[MeetingSet]
-ADD CONSTRAINT [FK_MeetingUserProfile]
-    FOREIGN KEY ([UserProfileId])
-    REFERENCES [dbo].[UserProfile]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_MeetingUserProfile'
-CREATE INDEX [IX_FK_MeetingUserProfile]
-ON [dbo].[MeetingSet]
-    ([UserProfileId]);
-GO
-
--- Creating foreign key on [UserProfileId] in table 'UserMeetingDatesSet'
-ALTER TABLE [dbo].[UserMeetingDatesSet]
-ADD CONSTRAINT [FK_UserMeetingDatesUserProfile]
-    FOREIGN KEY ([UserProfileId])
-    REFERENCES [dbo].[UserProfile]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_UserMeetingDatesUserProfile'
-CREATE INDEX [IX_FK_UserMeetingDatesUserProfile]
-ON [dbo].[UserMeetingDatesSet]
-    ([UserProfileId]);
 GO
 
 -- Creating foreign key on [UserProfileId] in table 'MeetingMembersSet'

@@ -1,49 +1,44 @@
 ﻿@using System.Web.UI.WebControls
 @model MeetingPlanner.Models.MeetingModel
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = @Model.Description;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (Model != null)
+@if (Model != null && Model.MeetingId > 0)
 {
     @Html.HiddenFor(m => m.MeetingId);
-    <div class="edit-main-content">
-        <div>
-            @if (Model.OwnerName == User.Identity.Name)
+    <div class="container">
+        <div style="text-align: center">
+            @if (Model.IsOwner)
             {
-                <div>Скопируйте ссылку, отправьте другу, чтобы он смог поучавствовать в планировании встречи<br>
-                    @Html.TextBox("MeetingLink", Model.MeetingLink)
-                </div>
+                <h4>Отправьте другим участникам номер встречи, чтобы они могли присоединиться к планированию - @Model.MeetingId</h4>
             }
-        </div>
-        <div class="edit-description">
-            <h3>
-            Пользователь с ником @Model.OwnerName запланировал встречу "@Model.Description"  <br>
-            Пожалуйста выберите удобные и неудобные для вас дни.
-            </h3>
-        </div>
-        <div class="edit-radiobuttons">
-            <div>
-                @Html.RadioButton("avaliableDates", 1, true, new {id = "avaliableDates"})
-                <label for="avaliableDates">Я могу</label>
-            </div>
-            <div>
-                @Html.RadioButton("avaliableDates", 2, new {id = "nopossibleDates"})
-                <label for="nopossibleDates">Я занят(а)</label>
-            </div>
-        </div>
-        <div class="edit-buttons">
-            @if (Model.OwnerName == User.Identity.Name)
+            else
             {
-                <input type="button" value="Расчитать" onclick="selector.sendForCount()"/>
+                <h4>Кто-то из ваших друзей запланировал встречу "@Model.Description" </h4>
             }
-            <input id="sendButton" type="button" value="Отправить" onclick="selector.sendClicked()"/>
+        
+            <h4>Пожалуйста выберите удобные и неудобные для вас дни, после чего нажмите кнопку отправить</h4>
+        </div>
+        <div class="btn-group" id="radioButtons" style="padding-top: 30px" data-toggle="buttons">
+            <label class="btn btn-default">
+                <input type="radio" id="nonavaliable" name="days" value="0">Неудобно
+            </label>
+            <label class="btn btn-default active">
+                <input type="radio" id="avaliable" name="days" value="1" checked="">Удобно
+            </label>
+        </div>
+        <div  style="float: right">
+            @if (Model.IsOwner)
+            {
+                <button class="btn btn-primary" onclick="selector.sendForCount()">Расчитать</button>
+            }
+            <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">Отправить</button>
         </div>
     </div>
-    <div id="calendar"></div>
-    <div id ="resultLink">
-        <p>Чтобы перейти к результатам нажмите на кнопку</p>
-        <input type="button" value="Кнопка" onclick="selector.gotoResult()">
+    <div id="calendar" style="padding-top: 30px"></div>
+    <div id ="resultLink" style="text-align: center; display: none">
+        <button class="btn btn-default" onclick="selector.gotoResult()">Перейти к результатам</button>
     </div>
 
     <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.js")"></script>
@@ -55,5 +50,5 @@
 }
 else
 {
-    <p>Простите, но такой встречи никто не планирует</p>
+    <h3>Простите, но такой встречи никто не планирует</h3>
 }

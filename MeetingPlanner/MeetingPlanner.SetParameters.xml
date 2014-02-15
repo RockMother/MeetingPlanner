@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="http://MeetingPlanner.somee.com" />
+  <setParameter name="MeetingPlannerContainer-Web.config Connection String" value="Data Source=.;database=Meeting;Integrated Security=true;" />
+  <setParameter name="DefaultConnection-Web.config Connection String" value="DefaultConnection_ConnectionString" />
+</parameters>

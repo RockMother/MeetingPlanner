@@ -35,14 +35,6 @@
       <End Role="UserProfile" EntitySet="UserProfile" />
       <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
     </AssociationSet>
-    <AssociationSet Name="MeetingUserProfile" Association="MeetingPlanner.Store.MeetingUserProfile">
-      <End Role="Meeting" EntitySet="MeetingSet" />
-      <End Role="UserProfile" EntitySet="UserProfile" />
-    </AssociationSet>
-    <AssociationSet Name="UserMeetingDatesUserProfile" Association="MeetingPlanner.Store.UserMeetingDatesUserProfile">
-      <End Role="UserMeetingDates" EntitySet="UserMeetingDatesSet" />
-      <End Role="UserProfile" EntitySet="UserProfile" />
-    </AssociationSet>
     <AssociationSet Name="MeetingMembersUserProfile" Association="MeetingPlanner.Store.MeetingMembersUserProfile">
       <End Role="MeetingMembers" EntitySet="MeetingMembersSet" />
       <End Role="UserProfile" EntitySet="UserProfile" />
@@ -54,7 +46,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MeetingStatusId" Type="int" Nullable="false" />
-    <Property Name="UserProfileId" Type="int" Nullable="false" />
+    <Property Name="UserProfileId" Type="int" Nullable="true" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="MeetingStatusSet">
@@ -80,7 +72,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="MeetingId" Type="int" Nullable="false" />
     <Property Name="IsAvaliable" Type="bit" Nullable="false" />
-    <Property Name="UserProfileId" Type="int" Nullable="false" />
+    <Property Name="UserProfileId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="UserProfile">
     <Key>
@@ -165,30 +157,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="MeetingUserProfile">
-    <End Role="Meeting" Type="MeetingPlanner.Store.MeetingSet" Multiplicity="*" />
-    <End Role="UserProfile" Type="MeetingPlanner.Store.UserProfile" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Meeting">
-        <PropertyRef Name="UserProfileId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserMeetingDatesUserProfile">
-    <End Role="UserMeetingDates" Type="MeetingPlanner.Store.UserMeetingDatesSet" Multiplicity="*" />
-    <End Role="UserProfile" Type="MeetingPlanner.Store.UserProfile" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="UserProfile">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserMeetingDates">
-        <PropertyRef Name="UserProfileId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="MeetingMembersUserProfile">
     <End Role="MeetingMembers" Type="MeetingPlanner.Store.MeetingMembersSet" Multiplicity="*" />
     <End Role="UserProfile" Type="MeetingPlanner.Store.UserProfile" Multiplicity="1" />
@@ -254,14 +222,6 @@
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="UserProfile" EntitySet="UserProfile" />
           </AssociationSet>
-          <AssociationSet Name="MeetingUserProfile" Association="MeetingPlanner.MeetingUserProfile">
-            <End Role="Meeting" EntitySet="MeetingSet" />
-            <End Role="UserProfile" EntitySet="UserProfile" />
-          </AssociationSet>
-          <AssociationSet Name="UserMeetingDatesUserProfile" Association="MeetingPlanner.UserMeetingDatesUserProfile">
-            <End Role="UserMeetingDates" EntitySet="UserMeetingDatesSet" />
-            <End Role="UserProfile" EntitySet="UserProfile" />
-          </AssociationSet>
           <AssociationSet Name="MeetingMembersUserProfile" Association="MeetingPlanner.MeetingMembersUserProfile">
             <End Role="MeetingMembers" EntitySet="MeetingMembersSet" />
             <End Role="UserProfile" EntitySet="UserProfile" />
@@ -274,8 +234,7 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="MeetingStatus" Relationship="MeetingPlanner.MeetingMeetingStatus" FromRole="Meeting" ToRole="MeetingStatus" />
           <Property Type="Int32" Name="MeetingStatusId" Nullable="false" />
-          <NavigationProperty Name="UserProfile" Relationship="MeetingPlanner.MeetingUserProfile" FromRole="Meeting" ToRole="UserProfile" />
-          <Property Type="Int32" Name="UserProfileId" Nullable="false" />
+          <Property Type="Int32" Name="UserProfileId" />
           <Property Type="String" Name="Description" Nullable="false" />
         </EntityType>
         <EntityType Name="MeetingStatus">
@@ -316,8 +275,7 @@
           <NavigationProperty Name="Meeting" Relationship="MeetingPlanner.UserMeetingDatesMeeting" FromRole="UserMeetingDates" ToRole="Meeting" />
           <Property Type="Int32" Name="MeetingId" Nullable="false" />
           <Property Type="Boolean" Name="IsAvaliable" Nullable="false" />
-          <NavigationProperty Name="UserProfile" Relationship="MeetingPlanner.UserMeetingDatesUserProfile" FromRole="UserMeetingDates" ToRole="UserProfile" />
-          <Property Type="Int32" Name="UserProfileId" Nullable="false" />
+          <Property Type="Int32" Name="UserProfileId" />
         </EntityType>
         <Association Name="MeetingMembersMeeting">
           <End Type="MeetingPlanner.MeetingMembers" Role="MeetingMembers" Multiplicity="*" />
@@ -387,30 +345,6 @@
         <Association Name="webpages_UsersInRoles">
           <End Type="MeetingPlanner.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
           <End Type="MeetingPlanner.UserProfile" Role="UserProfile" Multiplicity="*" />
-        </Association>
-        <Association Name="MeetingUserProfile">
-          <End Type="MeetingPlanner.Meeting" Role="Meeting" Multiplicity="*" />
-          <End Type="MeetingPlanner.UserProfile" Role="UserProfile" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Meeting">
-              <PropertyRef Name="UserProfileId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="UserMeetingDatesUserProfile">
-          <End Type="MeetingPlanner.UserMeetingDates" Role="UserMeetingDates" Multiplicity="*" />
-          <End Type="MeetingPlanner.UserProfile" Role="UserProfile" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserMeetingDates">
-              <PropertyRef Name="UserProfileId" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <Association Name="MeetingMembersUserProfile">
           <End Type="MeetingPlanner.MeetingMembers" Role="MeetingMembers" Multiplicity="*" />

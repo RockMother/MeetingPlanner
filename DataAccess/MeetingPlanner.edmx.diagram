@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="MeetingPlanner.MeetingStatus" Width="1.5" PointX="9" PointY="2.25" />
         <AssociationConnector Association="MeetingPlanner.MeetingMeetingStatus" />
         <EntityTypeShape EntityType="MeetingPlanner.MeetingMembers" Width="1.5" PointX="1.625" PointY="1.125" />
-        <EntityTypeShape EntityType="MeetingPlanner.UserMeetingDates" Width="3" PointX="0.875" PointY="4.25" />
+        <EntityTypeShape EntityType="MeetingPlanner.UserMeetingDates" Width="3" PointX="1.125" PointY="5" />
         <AssociationConnector Association="MeetingPlanner.MeetingMembersMeeting" />
         <AssociationConnector Association="MeetingPlanner.UserMeetingDatesMeeting" />
         <EntityTypeShape EntityType="MeetingPlanner.UserProfile" Width="2.5" PointX="8.125" PointY="6.625" />
@@ -17,8 +17,6 @@
         <EntityTypeShape EntityType="MeetingPlanner.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="7.75" />
         <EntityTypeShape EntityType="MeetingPlanner.webpages_Roles" Width="1.5" PointX="12" PointY="6.625" />
         <AssociationConnector Association="MeetingPlanner.webpages_UsersInRoles" />
-        <AssociationConnector Association="MeetingPlanner.MeetingUserProfile" />
-        <AssociationConnector Association="MeetingPlanner.UserMeetingDatesUserProfile" />
         <AssociationConnector Association="MeetingPlanner.MeetingMembersUserProfile" />
       </Diagram>
     </edmx:Diagrams>

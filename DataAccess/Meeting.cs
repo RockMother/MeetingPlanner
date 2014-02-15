@@ -17,10 +17,9 @@ namespace DataAccess
     {
         public int Id { get; set; }
         public int MeetingStatusId { get; set; }
-        public int UserProfileId { get; set; }
+        public Nullable<int> UserProfileId { get; set; }
         public string Description { get; set; }
     
         public virtual MeetingStatus MeetingStatus { get; set; }
-        public virtual UserProfile UserProfile { get; set; }
     }
 }

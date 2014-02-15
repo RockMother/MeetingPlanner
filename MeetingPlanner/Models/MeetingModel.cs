@@ -8,8 +8,7 @@ namespace MeetingPlanner.Models
     public class MeetingModel
     {
         public string Description { get; set; }
-        public string MeetingLink { get; set; }
-        public string OwnerName { get; set; }
+        public bool IsOwner { get; set; }
         public int MeetingId { get; set; }
     }
 }

@@ -4,7 +4,7 @@ calendarSelector = function () {
     var self = this;
     var greenDays = [];
     var redDays = [];
-    var $avaliableDates = $('#avaliableDates');
+    var $avaliableDates = $('#avaliable');
 
     function convertDateToSimpleDate(date, month) {
         var simpleDate = {
@@ -89,10 +89,9 @@ calendarSelector = function () {
         }).done(function (saveResult) {
             if (saveResult == 1) {
                 $("#calendar").hide();
-                $('.edit-radiobuttons').hide();
-                $('.edit-description').hide();
-                $("#resultLink").show();
+                $('#radioButtons').hide();
                 $('#sendButton').hide();
+                $("#resultLink").show();
             }
         });
     };
@@ -107,6 +106,8 @@ $(document).ready(function () {
     selector = new calendarSelector();
     $('#calendar').fullCalendar({
         editable: true,
+        height: 320,
+        width: 480,
         dayClick: selector.dayClicked,
     });
 });

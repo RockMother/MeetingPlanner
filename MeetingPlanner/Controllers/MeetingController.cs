@@ -18,26 +18,27 @@ namespace MeetingPlanner.Controllers
     {
         //
         // GET: /Meeting/
-        [HttpPost]
         public ActionResult New(string description)
         {
             using (var container = new MeetingPlannerContainer())
             {
-                var userProfile = container.UserProfile.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 var newMeeting = new Meeting()
                 {
-                    UserProfile = userProfile,
                     Description = description,
                     MeetingStatusId = 1
                 };
                 container.MeetingSet.Add(newMeeting);
                 container.SaveChanges();
+
+                Response.Cookies["MeetingOwner"].Value = newMeeting.Id.ToString();
+                Response.Cookies["MeetingOwner"].Expires = DateTime.Now.AddDays(1);
                 return Json(newMeeting.Id);
             }
         }
 
         public ActionResult Edit(int? id)
         {
+            var model = new MeetingModel();
             if (id.HasValue)
             {
                 using (var container = new MeetingPlannerContainer())
@@ -45,18 +46,19 @@ namespace MeetingPlanner.Controllers
                     var meeting = container.MeetingSet.FirstOrDefault(m => m.Id == id.Value);
                     if (meeting != null)
                     {
-                        var model = new MeetingModel
+                        model.Description = meeting.Description;
+                        model.MeetingId = meeting.Id;
+                        var cookie = Request.Cookies["MeetingOwner"];
+                        if (cookie != null)
                         {
-                            Description = meeting.Description,
-                            MeetingLink = @Url.Action("Edit", new {id = meeting.Id}),
-                            OwnerName = meeting.UserProfile.UserName,
-                            MeetingId = meeting.Id
-                        };
+                            model.IsOwner = Int32.Parse(cookie.Value) == id;
+                        }
                         return View(model);
                     }
                 }
             }
-            return View();
+            model.Description = "Встреча не найдена";
+            return View(model);
         }
 
         [HttpPost]
@@ -64,12 +66,8 @@ namespace MeetingPlanner.Controllers
         {
             using (var container = new MeetingPlannerContainer())
             {
-                var userProfile = container.UserProfile.FirstOrDefault(u => u.UserName == User.Identity.Name);
-                if (userProfile != null)
-                {
-                    MakeEntityUserMeetingDay(greenDays, meetingId, container, userProfile, true);
-                    MakeEntityUserMeetingDay(redDays, meetingId, container, userProfile, false);
-                }
+                MakeEntityUserMeetingDay(greenDays, meetingId, container, true);
+                MakeEntityUserMeetingDay(redDays, meetingId, container, false);
             }
             return Json(SaveResult.Ok);
         }
@@ -89,9 +87,7 @@ namespace MeetingPlanner.Controllers
             return Json(SaveResult.None);
         }
 
-        private static void MakeEntityUserMeetingDay(SimpleDate[] days, int meetingId,
-            MeetingPlannerContainer container,
-            UserProfile userProfile, bool isAvaliable)
+        private static void MakeEntityUserMeetingDay(SimpleDate[] days, int meetingId, MeetingPlannerContainer container, bool isAvaliable)
         {
             if (days != null)
             {
@@ -100,7 +96,6 @@ namespace MeetingPlanner.Controllers
                     container.UserMeetingDatesSet.Add(new UserMeetingDates
                     {
                         MeetingId = meetingId,
-                        UserProfileId = userProfile.Id,
                         IsAvaliable = isAvaliable,
                         Date = day.ToDateTime()
                     });

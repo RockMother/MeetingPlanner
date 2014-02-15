@@ -4,29 +4,53 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
 
-<link href=@Url.Content("~/Content/Home.css") rel="stylesheet"/>
+    <h1>Добро пожаловать в планировщик встреч.</h1>
+    <p>Данное приложение позволит вам и вашим друзьям выбрать наиболее удобный день для встречи.</p>
 
-<div class="home-center-div">
-    
-
-    
-
-    @if (User.Identity.IsAuthenticated)
-    {
-    <input type="button" value="Создать встречу" onclick="homePageCreateMeetengClicked()">
-    }
-    else
-    {
-    <div>
-        Для того чтобы создать встречу, пожалуйста, авторизуйтесь.
-    </div>    
-    }
 </div>
+<!-- Button trigger modal -->
+<div class="container-fluid">
+    <div style="float: left" >
+        <h4>Вы можете создать новую встречу</h4>
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+            Создать встречу
+        </button>
+    </div>
+    <div style="float: left; margin-left: 30px" >
+        <h4>или присоединиться к существующей</h4>
+        <input type="text" id="meetingNumber" class="input-sm" placeholder="Номер встречи">
+        <button  class="btn btn-primary btn-sm" onclick="homePageJoinClicked()">Присоединиться</button>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Создание встречи</h4>
+            </div>
+            <div class="modal-body">
+                <label for="meetingDescription" class="control-label">Введите описание встречи: </label>
+                <input type="text" class="input-sm" style="width: 100%" id="meetingDescription">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="homePageCreateMeetengClicked()">Создать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <script>
     function homePageCreateMeetengClicked() {
-        var meetingDescription = prompt("Введите описание встречи", "Описание");
+
+        var meetingDescription = $('#meetingDescription').val();
         var url = "@Url.Action("New", "Meeting")";
         if (meetingDescription != null) {
             $.ajax({
@@ -43,6 +67,13 @@
             });
         }
     }
+
+    function homePageJoinClicked() {
+        var meetingNumber = $('#meetingNumber').val();
+        url = "@Url.Action("Edit", "Meeting")" + "/" + meetingNumber;
+        window.location.assign(url);
+    }
+
 </script>
     
 

@@ -19,9 +19,8 @@ namespace DataAccess
         public System.DateTime Date { get; set; }
         public int MeetingId { get; set; }
         public bool IsAvaliable { get; set; }
-        public int UserProfileId { get; set; }
+        public Nullable<int> UserProfileId { get; set; }
     
         public virtual Meeting Meeting { get; set; }
-        public virtual UserProfile UserProfile { get; set; }
     }
 }
