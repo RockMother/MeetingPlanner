@@ -62,7 +62,7 @@ namespace MeetingPlanner.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendResults(SimpleDate[] greenDays, SimpleDate[] redDays, int meetingId)
+        public ActionResult SendResults(DateTime[] greenDays, DateTime[] redDays, int meetingId)
         {
             using (var container = new MeetingPlannerContainer())
             {
@@ -87,7 +87,7 @@ namespace MeetingPlanner.Controllers
             return Json(SaveResult.None);
         }
 
-        private static void MakeEntityUserMeetingDay(SimpleDate[] days, int meetingId, MeetingPlannerContainer container, bool isAvaliable)
+        private static void MakeEntityUserMeetingDay(DateTime[] days, int meetingId, MeetingPlannerContainer container, bool isAvaliable)
         {
             if (days != null)
             {
@@ -97,7 +97,7 @@ namespace MeetingPlanner.Controllers
                     {
                         MeetingId = meetingId,
                         IsAvaliable = isAvaliable,
-                        Date = day.ToDateTime()
+                        Date = day
                     });
                     container.SaveChanges();
                 }

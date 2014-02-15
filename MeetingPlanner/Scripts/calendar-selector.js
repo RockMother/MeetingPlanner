@@ -6,28 +6,12 @@ calendarSelector = function () {
     var redDays = [];
     var $avaliableDates = $('#avaliable');
 
-    function convertDateToSimpleDate(date, month) {
-        var simpleDate = {
-            Month: month,
-            Year: date.getUTCFullYear(),
-            Day: date.getDate()
-        };
-        return simpleDate;
-    }
-    
     function getMeetingId() {
         return $('#MeetingId').val();
     }
 
     this.dayClicked = function (date, allDay, jsEvent, view) {
-        var month;
-        var title = view.title;
-        var monthNames = view.calendar.options.monthNames;
-        $.each(monthNames, function(index, elem) {
-            if (title.substring(0, elem.length) == elem)
-                month = index + 1;
-        });
-        
+        var isoDate = date.toISOString();
         var avaliableDates = $avaliableDates.is(':checked');
         if (greenDays[date] && avaliableDates) {
             greenDays[date] = null;
@@ -37,12 +21,12 @@ calendarSelector = function () {
             $(this).css('background-color', '');
         } else {
             if (avaliableDates) {
-                greenDays[date] = convertDateToSimpleDate(date, month);
+                greenDays[date] = isoDate;
                 redDays[date] = null;
                 $(this).css('background-color', 'green');
             } else {
                 greenDays[date] = null;
-                redDays[date] = convertDateToSimpleDate(date, month);
+                redDays[date] = isoDate;
                 $(this).css('background-color', 'red');
             }
         }
