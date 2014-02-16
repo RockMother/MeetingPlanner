@@ -14,6 +14,7 @@
     <EntitySet Name="webpages_Membership" EntityType="MeetingPlanner.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="webpages_OAuthMembership" EntityType="MeetingPlanner.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="webpages_Roles" EntityType="MeetingPlanner.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CachedUserNames" EntityType="MeetingPlanner.Store.CachedUserNames" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="webpages_UsersInRoles" EntityType="MeetingPlanner.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="MeetingMeetingStatus" Association="MeetingPlanner.Store.MeetingMeetingStatus">
       <End Role="Meeting" EntitySet="MeetingSet" />
@@ -73,6 +74,7 @@
     <Property Name="MeetingId" Type="int" Nullable="false" />
     <Property Name="IsAvaliable" Type="bit" Nullable="false" />
     <Property Name="UserProfileId" Type="int" Nullable="true" />
+    <Property Name="CachedUserNamesId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="UserProfile">
     <Key>
@@ -112,6 +114,13 @@
     </Key>
     <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="CachedUserNames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="webpages_UsersInRoles">
     <Key>
@@ -226,6 +235,7 @@
             <End Role="MeetingMembers" EntitySet="MeetingMembersSet" />
             <End Role="UserProfile" EntitySet="UserProfile" />
           </AssociationSet>
+          <EntitySet Name="CachedUserNames" EntityType="MeetingPlanner.CachedUserName" />
         </EntityContainer>
         <EntityType Name="Meeting">
           <Key>
@@ -276,6 +286,7 @@
           <Property Type="Int32" Name="MeetingId" Nullable="false" />
           <Property Type="Boolean" Name="IsAvaliable" Nullable="false" />
           <Property Type="Int32" Name="UserProfileId" />
+          <Property Type="Int32" Name="CachedUserNamesId" />
         </EntityType>
         <Association Name="MeetingMembersMeeting">
           <End Type="MeetingPlanner.MeetingMembers" Role="MeetingMembers" Multiplicity="*" />
@@ -358,6 +369,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CachedUserName">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -399,6 +417,7 @@
           <ScalarProperty Name="MeetingId" ColumnName="MeetingId" />
           <ScalarProperty Name="IsAvaliable" ColumnName="IsAvaliable" />
           <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+          <ScalarProperty Name="CachedUserNamesId" ColumnName="CachedUserNamesId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -441,6 +460,14 @@
         <MappingFragment StoreEntitySet="webpages_Roles">
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CachedUserNames">
+      <EntityTypeMapping TypeName="IsTypeOf(MeetingPlanner.CachedUserName)">
+        <MappingFragment StoreEntitySet="CachedUserNames">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

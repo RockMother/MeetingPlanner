@@ -10,24 +10,32 @@ calendarSelector = function () {
         return $('#MeetingId').val();
     }
 
+    function getUserName() {
+        return $('#UserName').val();
+    }
+
     this.dayClicked = function (date, allDay, jsEvent, view) {
-        var isoDate = date.toISOString();
         var avaliableDates = $avaliableDates.is(':checked');
-        if (greenDays[date] && avaliableDates) {
+        var isoDate = date.toISOString();
+        self.markDate(date, isoDate, avaliableDates, $(this));
+    };
+
+    this.markDate = function (date, isoDate, isAvaliable, cell) {
+        if (greenDays[date] && isAvaliable) {
             greenDays[date] = null;
-            $(this).css('background-color', '');
-        } else if (redDays[date] && !avaliableDates) {
+            cell.css('background-color', '');
+        } else if (redDays[date] && !isAvaliable) {
             redDays[date] = null;
-            $(this).css('background-color', '');
+            cell.css('background-color', '');
         } else {
-            if (avaliableDates) {
+            if (isAvaliable) {
                 greenDays[date] = isoDate;
                 redDays[date] = null;
-                $(this).css('background-color', 'green');
+                cell.css('background-color', 'green');
             } else {
                 greenDays[date] = null;
                 redDays[date] = isoDate;
-                $(this).css('background-color', 'red');
+                cell.css('background-color', '#E96A6D');
             }
         }
     };
@@ -66,7 +74,8 @@ calendarSelector = function () {
             data: JSON.stringify({
                 greenDays: green,
                 redDays: red,
-                meetingId: getMeetingId()
+                meetingId: getMeetingId(),
+                userName: getUserName()
             }),
             contentType: "application/json; charset=utf-8",
             dataType: "json"
@@ -76,6 +85,8 @@ calendarSelector = function () {
                 $('#radioButtons').hide();
                 $('#sendButton').hide();
                 $("#resultLink").show();
+                $('#UserName').hide();
+                $('#lblEnterName').hide();
             }
         });
     };
@@ -85,25 +96,3 @@ calendarSelector = function () {
         window.location.assign(url);
     };
 };
-
-$(document).ready(function () {
-    selector = new calendarSelector();
-    $('#calendar').fullCalendar({
-        editable: true,
-        //header: {
-        //    left: 'prev,next today',
-        //    center: 'title',
-        //    //right: 'month,agendaWeek,agendaDay'
-        //},
-        selectable: true,
-        height: 320,
-        width: 480,
-        dayClick: selector.dayClicked,
-        
-        monthNames: fullCalendarLocalizedDefaults.monthNames,
-        monthNamesShort: fullCalendarLocalizedDefaults.monthNamesShort,
-        dayNames: fullCalendarLocalizedDefaults.dayNames,
-        dayNamesShort: fullCalendarLocalizedDefaults.dayNamesShort,
-        buttonText: fullCalendarLocalizedDefaults.buttonText
-    });
-});

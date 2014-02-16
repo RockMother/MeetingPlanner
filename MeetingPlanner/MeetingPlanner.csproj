@@ -285,6 +285,7 @@
     <Content Include="Scripts\calendar-selector.js" />
     <Content Include="Scripts\chart\jqplot.barRenderer.min.js" />
     <Content Include="Scripts\chart\jqplot.categoryAxisRenderer.min.js" />
+    <Content Include="Scripts\chart\jqplot.highlighter.min.js" />
     <Content Include="Scripts\chart\jqplot.pointLabels.min.js" />
     <Content Include="Content\chart\jquery.jqplot.min.css" />
     <Content Include="Scripts\chart\jquery.jqplot.min.js" />

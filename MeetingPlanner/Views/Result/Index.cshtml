@@ -4,6 +4,7 @@
     ViewBag.Title = "title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div style="text-align: center">
     <h3>
         @Model.Message
@@ -11,21 +12,40 @@
 </div>
 @if (Model.Results != null && Model.Results.Count > 0)
 {
-    <div id='chart1'></div>
+    <div id='chartResults'></div>
     <script>
         $(document).ready(function () {
             var ticks = [];
             var convenient = [];
             var inconvenient = [];
+            var users = [];
             @foreach (var result in Model.Results)
             {
-                @:ticks.push('@result.Key');
-                @:convenient.push(@result.Value.Convenient);
-                @:inconvenient.push(@result.Value.Inconvenient);
+                <text>
+                ticks.push('@result.Key');
+                convenient.push(@result.Value.Convenient);
+                inconvenient.push(@result.Value.Inconvenient);
+                </text>
+                foreach (var userName in result.Value.UserNamesConvenient)
+                {
+                    <text>    
+                    if(!users['@result.Key'])
+                        users['@result.Key'] = {userNamesConvenient: [], userNamesInconvenient: []};
+                    users['@result.Key'].userNamesConvenient.push('@userName');
+                    </text>    
+                }
+                foreach (var userName in result.Value.UserNamesInconvenient)
+                {
+                    <text>    
+                    if(!users['@result.Key'])
+                        users['@result.Key'] = {userNamesConvenient: [], userNamesInconvenient: []};
+                    users['@result.Key'].userNamesInconvenient.push('@userName');
+                    </text>    
+                }
             }
 
-            var plot1 = $.jqplot('chart1', [convenient, inconvenient], {
-                seriesColors: ['green', 'red'],
+            $.jqplot('chartResults', [convenient, inconvenient], {
+                seriesColors: ['green', '#E96A6D'],
                 // The "seriesDefaults" option is an options object that will
                 // be applied to all series in the chart.
                 seriesDefaults: {
@@ -33,10 +53,6 @@
                     rendererOptions: { fillToZero: true }
                 },
                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-                // Show the legend and put it outside the grid, but inside the
-                // plot container, shrinking the grid to accomodate the legend.
-                // A value of "outside" would not shrink the grid and allow
-                // the legend to overflow the container.
                 legend: {
                     show: false
                 },
@@ -53,6 +69,31 @@
                         labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
                         tickOptions: { formatString: '%d' }
                     }
+                },
+                
+                highlighter: {
+                    show: true,
+                    showMarker: false,
+                    showTooltip: true,
+                    tooltipContentEditor: function (str, seriesIndex, pointIndex, plot) {
+                        var key = plot.axes.xaxis.ticks[pointIndex];
+                        var objectNames = users[key];
+                        var source;
+                        if (seriesIndex == 0)
+                            source = objectNames.userNamesConvenient;
+                        else {
+                            source = objectNames.userNamesInconvenient;
+                        }
+                        var result = '';
+                        var first = true;
+                        for (var index in source) {
+                            if (!first)
+                                result += ', ';
+                            result += source[index];
+                            first = false;
+                        }
+                        return result;
+                    }
                 }
             });
         });
@@ -64,4 +105,5 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/chart/jqplot.pointLabels.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/chart/jqplot.categoryAxisRenderer.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/chart/jqplot.barRenderer.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/chart/jqplot.highlighter.min.js")"></script>
 <link rel="stylesheet" type="text/css" hrf="@Url.Content("~/Content/chart/jquery.jqplot.min.css")" />

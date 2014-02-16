@@ -13,15 +13,9 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class UserMeetingDates
+    public partial class CachedUserName
     {
         public int Id { get; set; }
-        public System.DateTime Date { get; set; }
-        public int MeetingId { get; set; }
-        public bool IsAvaliable { get; set; }
-        public Nullable<int> UserProfileId { get; set; }
-        public Nullable<int> CachedUserNamesId { get; set; }
-    
-        public virtual Meeting Meeting { get; set; }
+        public string UserName { get; set; }
     }
 }

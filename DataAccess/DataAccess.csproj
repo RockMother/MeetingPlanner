@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachedUserName.cs">
+      <DependentUpon>MeetingPlanner.Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CachedUserName_Mapping.cs">
+      <DependentUpon>MeetingPlanner.Mapping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Meeting.cs">
       <DependentUpon>MeetingPlanner.Entities.tt</DependentUpon>
     </Compile>

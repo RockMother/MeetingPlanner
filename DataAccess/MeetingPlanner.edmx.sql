@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/15/2014 11:41:01
+-- Date Created: 02/16/2014 23:29:12
 -- Generated from EDMX file: C:\Projects\MeetingPlanner\DataAccess\MeetingPlanner.edmx
 -- --------------------------------------------------
 
@@ -31,12 +31,6 @@ IF OBJECT_ID(N'[dbo].[FK_webpages_UsersInRoles_webpages_Roles]', 'F') IS NOT NUL
 GO
 IF OBJECT_ID(N'[dbo].[FK_webpages_UsersInRoles_UserProfile]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[webpages_UsersInRoles] DROP CONSTRAINT [FK_webpages_UsersInRoles_UserProfile];
-GO
-IF OBJECT_ID(N'[dbo].[FK_MeetingUserProfile]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MeetingSet] DROP CONSTRAINT [FK_MeetingUserProfile];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserMeetingDatesUserProfile]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UserMeetingDatesSet] DROP CONSTRAINT [FK_UserMeetingDatesUserProfile];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MeetingMembersUserProfile]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MeetingMembersSet] DROP CONSTRAINT [FK_MeetingMembersUserProfile];
@@ -108,7 +102,8 @@ CREATE TABLE [dbo].[UserMeetingDatesSet] (
     [Date] datetime  NOT NULL,
     [MeetingId] int  NOT NULL,
     [IsAvaliable] bit  NOT NULL,
-    [UserProfileId] int  NULL
+    [UserProfileId] int  NULL,
+    [CachedUserNamesId] int  NULL
 );
 GO
 
@@ -147,6 +142,13 @@ GO
 CREATE TABLE [dbo].[webpages_Roles] (
     [RoleId] int IDENTITY(1,1) NOT NULL,
     [RoleName] nvarchar(256)  NOT NULL
+);
+GO
+
+-- Creating table 'CachedUserNames'
+CREATE TABLE [dbo].[CachedUserNames] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UserName] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -207,6 +209,12 @@ GO
 ALTER TABLE [dbo].[webpages_Roles]
 ADD CONSTRAINT [PK_webpages_Roles]
     PRIMARY KEY CLUSTERED ([RoleId] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'CachedUserNames'
+ALTER TABLE [dbo].[CachedUserNames]
+ADD CONSTRAINT [PK_CachedUserNames]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [webpages_Roles_RoleId], [UserProfiles_Id] in table 'webpages_UsersInRoles'

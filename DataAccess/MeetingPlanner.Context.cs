@@ -42,6 +42,7 @@ namespace DataAccess
     	}
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {		
+    		modelBuilder.Configurations.Add(new CachedUserName_Mapping());
     		modelBuilder.Configurations.Add(new Meeting_Mapping());
     		modelBuilder.Configurations.Add(new MeetingMembers_Mapping());
     		modelBuilder.Configurations.Add(new MeetingStatus_Mapping());
@@ -60,5 +61,6 @@ namespace DataAccess
         public DbSet<webpages_Membership> webpages_Membership { get; set; }
         public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public DbSet<CachedUserName> CachedUserNames { get; set; }
     }
 }

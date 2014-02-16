@@ -28,17 +28,31 @@ namespace MeetingPlanner.Controllers
                     else if (meeting.MeetingStatusId == (int) MeetingStatusEnum.Closed)
                     {
                         model.Results = new Dictionary<string, ResultModel.DateCount>();
-                        var userDates = container.UserMeetingDatesSet.Where(m => m.MeetingId == id).OrderBy(m => m.Date);
+                        var userDates =
+                            from user in container.UserMeetingDatesSet.Where(m => m.MeetingId == id).OrderBy(m => m.Date)
+                            join userName in container.CachedUserNames on user.CachedUserNamesId equals userName.Id into
+                                results
+                            from result in results.DefaultIfEmpty()
+                            select new {userDate = user, userName = result == null ? string.Empty : result.UserName}; 
+
+
                         foreach (var userDate in userDates)
                         {
-                            string date = userDate.Date.ToShortDateString();
+                            string date = userDate.userDate.Date.ToShortDateString();
+                            string userName = userDate.userName;
                             if (!model.Results.ContainsKey(date))
                                 model.Results.Add(date, new ResultModel.DateCount());
-                            if (userDate.IsAvaliable)
+                            if (userDate.userDate.IsAvaliable)
+                            {
+                                if (!string.IsNullOrEmpty(userName) && !model.Results[date].UserNamesConvenient.Contains(userDate.userName))
+                                    model.Results[date].UserNamesConvenient.Add(userDate.userName);
                                 model.Results[date].Convenient++;
+                            }
                             else
                             {
-                                model.Results[date].Inconvenient--;
+                                if (!string.IsNullOrEmpty(userName) && !model.Results[date].UserNamesInconvenient.Contains(userDate.userName))
+                                    model.Results[date].UserNamesInconvenient.Add(userDate.userName);
+                                model.Results[date].Inconvenient++;
                             }
                         }
 
@@ -46,7 +60,7 @@ namespace MeetingPlanner.Controllers
                         string finalDate = string.Empty;
                         foreach (var pair in model.Results)
                         {
-                            int value = pair.Value.Convenient + (pair.Value.Inconvenient*2);
+                            int value = pair.Value.Convenient - (pair.Value.Inconvenient*2);
                             if (value > max)
                             {
                                 max = value;

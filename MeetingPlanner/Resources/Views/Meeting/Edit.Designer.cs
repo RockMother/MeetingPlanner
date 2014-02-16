@@ -140,5 +140,14 @@ namespace MeetingPlanner.Resources.Views.Meeting {
                 return ResourceManager.GetString("SorryNoMeeting", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your name(not necessarily).
+        /// </summary>
+        public static string YourName {
+            get {
+                return ResourceManager.GetString("YourName", resourceCulture);
+            }
+        }
     }
 }

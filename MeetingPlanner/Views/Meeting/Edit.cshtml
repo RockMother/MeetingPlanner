@@ -31,11 +31,13 @@
                 </label>
             </div>
             <div  class="float-right">
+                <label id="lblEnterName">@Edit.YourName</label>
+                <input type="text" id="UserName" class="input-sm"/>
+                <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">@Edit.SendButton</button>
                 @if (Model.IsOwner)
-                {
+                { 
                     <button class="btn btn-primary" onclick="selector.sendForCount()">@Edit.CountButton</button>
                 }
-                <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">@Edit.SendButton</button>
             </div>
         </div>
     </div>
@@ -43,11 +45,59 @@
     <div id ="resultLink" style="text-align: center; display: none">
         <button class="btn btn-default" onclick="selector.gotoResult()">@Edit.GoToResult</button>
     </div>
+    
+    <script>
+        $(document).ready(function () {
+            selector = new calendarSelector();
+            var cells = [];
+            $('#calendar').fullCalendar({
+                editable: true,
+                //header: {
+                //    left: 'prev,next today',
+                //    center: 'title',
+                //    //right: 'month,agendaWeek,agendaDay'
+                //},
+                selectable: true,
+                height: 320,
+                width: 480,
+                dayClick: selector.dayClicked,
+                @if (Model.MarkedDays != null && Model.MarkedDays.Count > 0)
+                {
+                <text>
+                dayRender: function (date, cell) {
+                    var isoDate = date.toISOString();
+                    @foreach (var value in Model.MarkedDays)
+                    {
+                        <text>
+                    if (isoDate == new Date( @value.Key.Year, @value.Key.Month - 1, @value.Key.Day).toISOString())
+                    {
+                        cells[isoDate] = {
+                            cell: cell, 
+                            isAvaliable: @value.Value.ToString().ToLower(),
+                            date: date
+                            };
+                    }
+                        </text>
+                    }        
+                }, 
+                </text>
+                }
+                monthNames: fullCalendarLocalizedDefaults.monthNames,
+                monthNamesShort: fullCalendarLocalizedDefaults.monthNamesShort,
+                dayNames: fullCalendarLocalizedDefaults.dayNames,
+                dayNamesShort: fullCalendarLocalizedDefaults.dayNamesShort,
+                buttonText: fullCalendarLocalizedDefaults.buttonText
+            });
+            for(var isoDate in cells) {
+                var obj = cells[isoDate];
+                selector.markDate(obj.date, isoDate, obj.isAvaliable, obj.cell);
+            }
+        });
+    </script>
 
     
-    var fileName = "~/Scripts/fullcalendar-localization/fullcalendar-titles." + Culture.Substring(0, 2) + ".js";
+                var fileName = "~/Scripts/fullcalendar-localization/fullcalendar-titles." + Culture.Substring(0, 2) + ".js";
     <script src="@Url.Content(fileName)"></script>
-    <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.js")"></script>
     <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.min.js")"></script>
     <script src="@Url.Content("~/Scripts/calendar-selector.js")"></script>
     <script src="@Url.Content("~/Scripts/fullcalendar/gcal.js")"></script>

@@ -18,18 +18,14 @@ namespace DataAccess
     using System.Data.Entity.ModelConfiguration;
     using System.Data.Entity.Infrastructure;
     
-    internal partial class UserMeetingDates_Mapping : EntityTypeConfiguration<UserMeetingDates>
+    internal partial class CachedUserName_Mapping : EntityTypeConfiguration<CachedUserName>
     {
-        public UserMeetingDates_Mapping()
+        public CachedUserName_Mapping()
         {                        
               this.HasKey(t => t.Id);        
-              this.ToTable("UserMeetingDatesSet");
+              this.ToTable("CachedUserNames");
               this.Property(t => t.Id).HasColumnName("Id");
-              this.Property(t => t.Date).HasColumnName("Date");
-              this.Property(t => t.MeetingId).HasColumnName("MeetingId");
-              this.Property(t => t.IsAvaliable).HasColumnName("IsAvaliable");
-              this.Property(t => t.UserProfileId).HasColumnName("UserProfileId");
-              this.Property(t => t.CachedUserNamesId).HasColumnName("CachedUserNamesId");
+              this.Property(t => t.UserName).HasColumnName("UserName").IsRequired();
          }
     }
 }

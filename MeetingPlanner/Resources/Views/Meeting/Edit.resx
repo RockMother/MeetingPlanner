@@ -144,4 +144,7 @@
   <data name="SorryNoMeeting" xml:space="preserve">
     <value>Sorry, but no such meeting planned</value>
   </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Enter your name(not necessarily)</value>
+  </data>
 </root>
