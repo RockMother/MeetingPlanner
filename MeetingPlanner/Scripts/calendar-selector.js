@@ -88,7 +88,6 @@ calendarSelector = function () {
 
 $(document).ready(function () {
     selector = new calendarSelector();
-    debugger;
     $('#calendar').fullCalendar({
         editable: true,
         //header: {

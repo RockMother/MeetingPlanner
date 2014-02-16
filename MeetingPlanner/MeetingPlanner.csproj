@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MeetingModel.cs" />
+    <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\SimpleDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Controllers\Result\Strings.Designer.cs">
@@ -282,12 +283,17 @@
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\calendar-selector.js" />
+    <Content Include="Scripts\chart\jqplot.barRenderer.min.js" />
+    <Content Include="Scripts\chart\jqplot.categoryAxisRenderer.min.js" />
+    <Content Include="Scripts\chart\jqplot.pointLabels.min.js" />
+    <Content Include="Content\chart\jquery.jqplot.min.css" />
+    <Content Include="Scripts\chart\jquery.jqplot.min.js" />
     <Content Include="Scripts\fullcalendar-localization\fullcalendar-titles.en.js" />
     <Content Include="Scripts\fullcalendar-localization\fullcalendar-titles.ru.js" />
-    <Content Include="Scripts\fullcalendar\fullcalendar.css" />
+    <Content Include="Content\fullcalendar\fullcalendar.css" />
     <Content Include="Scripts\fullcalendar\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
-    <Content Include="Scripts\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Content\fullcalendar\fullcalendar.print.css" />
     <Content Include="Scripts\fullcalendar\gcal.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />

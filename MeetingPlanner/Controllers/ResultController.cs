@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess;
 using MeetingPlanner.Enums;
+using MeetingPlanner.Models;
 using MeetingPlanner.Resources.Controllers.Result;
 
 namespace MeetingPlanner.Controllers
@@ -13,7 +15,7 @@ namespace MeetingPlanner.Controllers
     {
         public ActionResult Index(int? id)
         {
-            var message = string.Empty;
+            var model = new ResultModel();
             using (var container = new MeetingPlannerContainer())
             {
                 var meeting = container.MeetingSet.FirstOrDefault(m => m.Id == id);
@@ -21,39 +23,41 @@ namespace MeetingPlanner.Controllers
                 {
                     if (meeting.MeetingStatusId == (int) MeetingStatusEnum.Open)
                     {
-                        message = Strings.PleaseReloadLater;
+                        model.Message = Strings.PleaseReloadLater;
                     }
                     else if (meeting.MeetingStatusId == (int) MeetingStatusEnum.Closed)
                     {
-                        var result = new Dictionary<DateTime, int>();
-                        var userDates = container.UserMeetingDatesSet.Where(m => m.MeetingId == id);
+                        model.Results = new Dictionary<string, ResultModel.DateCount>();
+                        var userDates = container.UserMeetingDatesSet.Where(m => m.MeetingId == id).OrderBy(m => m.Date);
                         foreach (var userDate in userDates)
                         {
-                            if (!result.ContainsKey(userDate.Date))
-                                result.Add(userDate.Date, 0);
+                            string date = userDate.Date.ToShortDateString();
+                            if (!model.Results.ContainsKey(date))
+                                model.Results.Add(date, new ResultModel.DateCount());
                             if (userDate.IsAvaliable)
-                                result[userDate.Date]++;
+                                model.Results[date].Convenient++;
                             else
                             {
-                                result[userDate.Date] = result[userDate.Date] - 2;
+                                model.Results[date].Inconvenient--;
                             }
                         }
+
                         var max = int.MinValue;
-                        DateTime finalDate = DateTime.MaxValue;
-                        foreach (var pair in result)
+                        string finalDate = string.Empty;
+                        foreach (var pair in model.Results)
                         {
-                            if (pair.Value > max)
+                            int value = pair.Value.Convenient + (pair.Value.Inconvenient*2);
+                            if (value > max)
                             {
-                                max = pair.Value;
+                                max = value;
                                 finalDate = pair.Key;
                             }
                         }
-                        message = string.Format(Strings.CountResult, finalDate.ToShortDateString());
+                        model.Message = string.Format(Strings.CountResult, finalDate);
                     }
                 }
             }
-            ViewBag.Message = message;
-            return View();
+            return View(model);
         }
 
     }

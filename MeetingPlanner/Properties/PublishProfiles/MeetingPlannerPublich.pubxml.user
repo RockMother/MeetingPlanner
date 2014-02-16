@@ -93,7 +93,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:45:43</publishTime>
     </File>
     <File Include="bin/MeetingPlanner.dll">
-      <publishTime>02/15/2014 21:09:19</publishTime>
+      <publishTime>02/16/2014 17:24:09</publishTime>
     </File>
     <File Include="bin/Microsoft.Data.Edm.dll">
       <publishTime>02/15/2014 00:45:02</publishTime>
@@ -114,7 +114,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:45:31</publishTime>
     </File>
     <File Include="bin/ru/MeetingPlanner.resources.dll">
-      <publishTime>02/15/2014 21:09:19</publishTime>
+      <publishTime>02/16/2014 17:24:09</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
       <publishTime>02/15/2014 00:45:03</publishTime>
@@ -205,6 +205,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/bootstrap/bootstrap.min.css">
       <publishTime>02/15/2014 16:50:31</publishTime>
+    </File>
+    <File Include="Content/chart/jquery.jqplot.min.css">
+      <publishTime>03/26/2013 21:28:22</publishTime>
+    </File>
+    <File Include="Content/fullcalendar/fullcalendar.css">
+      <publishTime>02/15/2014 00:44:02</publishTime>
+    </File>
+    <File Include="Content/fullcalendar/fullcalendar.print.css">
+      <publishTime>02/15/2014 00:44:02</publishTime>
     </File>
     <File Include="Content/Home.css">
       <publishTime>02/15/2014 00:43:47</publishTime>
@@ -429,13 +438,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 16:50:32</publishTime>
     </File>
     <File Include="Scripts/calendar-selector.js">
-      <publishTime>02/15/2014 21:08:56</publishTime>
+      <publishTime>02/16/2014 16:50:17</publishTime>
+    </File>
+    <File Include="Scripts/chart/jqplot.barRenderer.min.js">
+      <publishTime>03/26/2013 21:28:52</publishTime>
+    </File>
+    <File Include="Scripts/chart/jqplot.categoryAxisRenderer.min.js">
+      <publishTime>03/26/2013 21:28:52</publishTime>
+    </File>
+    <File Include="Scripts/chart/jqplot.pointLabels.min.js">
+      <publishTime>03/26/2013 21:28:52</publishTime>
+    </File>
+    <File Include="Scripts/chart/jquery.jqplot.min.js">
+      <publishTime>03/26/2013 21:28:52</publishTime>
     </File>
     <File Include="Scripts/fullcalendar-localization/fullcalendar-titles.en.js">
-      <publishTime>02/15/2014 21:07:29</publishTime>
+      <publishTime>02/15/2014 21:37:48</publishTime>
     </File>
     <File Include="Scripts/fullcalendar-localization/fullcalendar-titles.ru.js">
-      <publishTime>02/15/2014 21:07:27</publishTime>
+      <publishTime>02/15/2014 21:37:51</publishTime>
     </File>
     <File Include="Scripts/fullcalendar/fullcalendar.css">
       <publishTime>02/15/2014 00:44:02</publishTime>
@@ -525,13 +546,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 20:07:13</publishTime>
     </File>
     <File Include="Views/Meeting/Edit.cshtml">
-      <publishTime>02/15/2014 21:00:11</publishTime>
+      <publishTime>02/16/2014 15:57:32</publishTime>
     </File>
     <File Include="Views/Meeting/New.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Views/Result/Index.cshtml">
-      <publishTime>02/15/2014 20:19:53</publishTime>
+      <publishTime>02/16/2014 17:23:47</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
@@ -549,7 +570,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/15/2014 21:19:07</publishTime>
+      <publishTime>02/16/2014 17:24:15</publishTime>
     </File>
   </ItemGroup>
 </Project>
