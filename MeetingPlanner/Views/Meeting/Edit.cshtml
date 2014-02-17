@@ -34,10 +34,6 @@
                 <label id="lblEnterName">@Edit.YourName</label>
                 <input type="text" id="UserName" class="input-sm"/>
                 <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">@Edit.SendButton</button>
-                @if (Model.IsOwner)
-                { 
-                    <button class="btn btn-primary" onclick="selector.sendForCount()">@Edit.CountButton</button>
-                }
             </div>
         </div>
     </div>
@@ -98,10 +94,11 @@
     
                 var fileName = "~/Scripts/fullcalendar-localization/fullcalendar-titles." + Culture.Substring(0, 2) + ".js";
     <script src="@Url.Content(fileName)"></script>
+    <link href=@Url.Content("~/Content/fullcalendar/fullcalendar.css") rel="stylesheet"/>
+    <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.min.js")"></script>
     <script src="@Url.Content("~/Scripts/fullcalendar/fullcalendar.min.js")"></script>
     <script src="@Url.Content("~/Scripts/calendar-selector.js")"></script>
     <script src="@Url.Content("~/Scripts/fullcalendar/gcal.js")"></script>
-    <link href=@Url.Content("~/Content/fullcalendar/fullcalendar.css") rel="stylesheet"/>
     <link href=@Url.Content("~/Content/fullcalendar/fullcalendar.print.css") rel="stylesheet"/>
 }
 else

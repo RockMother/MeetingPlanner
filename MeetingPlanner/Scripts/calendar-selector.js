@@ -80,14 +80,15 @@ calendarSelector = function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function (saveResult) {
-            if (saveResult == 1) {
-                $("#calendar").hide();
-                $('#radioButtons').hide();
-                $('#sendButton').hide();
-                $("#resultLink").show();
-                $('#UserName').hide();
-                $('#lblEnterName').hide();
-            }
+            //if (saveResult == 1) {
+            //    $("#calendar").hide();
+            //    $('#radioButtons').hide();
+            //    $('#sendButton').hide();
+            //    $("#resultLink").show();
+            //    $('#UserName').hide();
+            //    $('#lblEnterName').hide();
+            //}
+            self.gotoResult();
         });
     };
 

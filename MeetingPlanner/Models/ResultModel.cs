@@ -9,7 +9,7 @@ namespace MeetingPlanner.Models
     {
         public Dictionary<string, DateCount> Results { get; set; }
         public string Message { get; set; }
-        
+        public int MaxValue { get; set; }
 
         public class DateCount
         {

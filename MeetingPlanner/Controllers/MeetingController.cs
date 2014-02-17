@@ -115,21 +115,6 @@ namespace MeetingPlanner.Controllers
             return Json(SaveResult.Ok);
         }
 
-        public ActionResult CountResult(int meetingId)
-        {
-            using (var container = new MeetingPlannerContainer())
-            {
-                var meeting = container.MeetingSet.FirstOrDefault(m => m.Id == meetingId);
-                if (meeting != null)
-                {
-                    meeting.MeetingStatusId = (int) MeetingStatusEnum.Closed;
-                    container.SaveChanges();
-                    return Json(SaveResult.Ok);
-                }
-            }
-            return Json(SaveResult.None);
-        }
-
         private string GetVoteCookieName(int meetingId)
         {
             return "VoteMeeting_" + meetingId.ToString();

@@ -21,54 +21,53 @@ namespace MeetingPlanner.Controllers
                 var meeting = container.MeetingSet.FirstOrDefault(m => m.Id == id);
                 if (meeting != null)
                 {
-                    if (meeting.MeetingStatusId == (int) MeetingStatusEnum.Open)
+                    model.Results = new Dictionary<string, ResultModel.DateCount>();
+                    var userDates =
+                        from user in container.UserMeetingDatesSet.Where(m => m.MeetingId == id)
+                        join userName in container.CachedUserNames on user.CachedUserNamesId equals userName.Id into
+                            results
+                        from result in results.DefaultIfEmpty()
+                        select new {userDate = user, userName = result == null ? string.Empty : result.UserName};
+                    userDates = userDates.OrderBy(key => key.userDate.Date);
+
+                    foreach (var userDate in userDates)
                     {
-                        model.Message = Strings.PleaseReloadLater;
+                        string date = userDate.userDate.Date.ToShortDateString();
+                        string userName = userDate.userName;
+                        if (!model.Results.ContainsKey(date))
+                            model.Results.Add(date, new ResultModel.DateCount());
+                        if (userDate.userDate.IsAvaliable)
+                        {
+                            if (!string.IsNullOrEmpty(userName) &&
+                                !model.Results[date].UserNamesConvenient.Contains(userDate.userName))
+                                model.Results[date].UserNamesConvenient.Add(userDate.userName);
+                            model.Results[date].Convenient++;
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(userName) &&
+                                !model.Results[date].UserNamesInconvenient.Contains(userDate.userName))
+                                model.Results[date].UserNamesInconvenient.Add(userDate.userName);
+                            model.Results[date].Inconvenient++;
+                        }
                     }
-                    else if (meeting.MeetingStatusId == (int) MeetingStatusEnum.Closed)
+
+                    var max = int.MinValue;
+                    string finalDate = string.Empty;
+                    foreach (var pair in model.Results)
                     {
-                        model.Results = new Dictionary<string, ResultModel.DateCount>();
-                        var userDates =
-                            from user in container.UserMeetingDatesSet.Where(m => m.MeetingId == id).OrderBy(m => m.Date)
-                            join userName in container.CachedUserNames on user.CachedUserNamesId equals userName.Id into
-                                results
-                            from result in results.DefaultIfEmpty()
-                            select new {userDate = user, userName = result == null ? string.Empty : result.UserName}; 
-
-
-                        foreach (var userDate in userDates)
+                        int value = pair.Value.Convenient - (pair.Value.Inconvenient*2);
+                        if (value > max)
                         {
-                            string date = userDate.userDate.Date.ToShortDateString();
-                            string userName = userDate.userName;
-                            if (!model.Results.ContainsKey(date))
-                                model.Results.Add(date, new ResultModel.DateCount());
-                            if (userDate.userDate.IsAvaliable)
-                            {
-                                if (!string.IsNullOrEmpty(userName) && !model.Results[date].UserNamesConvenient.Contains(userDate.userName))
-                                    model.Results[date].UserNamesConvenient.Add(userDate.userName);
-                                model.Results[date].Convenient++;
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(userName) && !model.Results[date].UserNamesInconvenient.Contains(userDate.userName))
-                                    model.Results[date].UserNamesInconvenient.Add(userDate.userName);
-                                model.Results[date].Inconvenient++;
-                            }
+                            max = value;
+                            finalDate = pair.Key;
                         }
-
-                        var max = int.MinValue;
-                        string finalDate = string.Empty;
-                        foreach (var pair in model.Results)
-                        {
-                            int value = pair.Value.Convenient - (pair.Value.Inconvenient*2);
-                            if (value > max)
-                            {
-                                max = value;
-                                finalDate = pair.Key;
-                            }
-                        }
-                        model.Message = string.Format(Strings.CountResult, finalDate);
                     }
+                    var maxConv = model.Results.Max(p => p.Value.Convenient);
+                    var maxInconv = model.Results.Max(p => p.Value.Inconvenient);
+                    model.MaxValue = Math.Max(maxConv, maxInconv);
+                    model.Message = string.Format(Strings.CountResult, finalDate);
+
                 }
             }
             return View(model);

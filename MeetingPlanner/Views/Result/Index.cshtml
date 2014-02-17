@@ -67,7 +67,9 @@
                     yaxis: {
                         pad: 1,
                         labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-                        tickOptions: { formatString: '%d' }
+                        tickInterval: 1,
+                        min: 0,
+                        max:@Model.MaxValue + 1
                     }
                 },
                 
