@@ -11,5 +11,6 @@ namespace MeetingPlanner.Models
         public bool IsOwner { get; set; }
         public int MeetingId { get; set; }
         public Dictionary<DateTime, bool> MarkedDays { get; set; }
+        public string UserName { get; set; }
     }
 }

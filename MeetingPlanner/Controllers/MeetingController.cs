@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using System.Web.Util;
 using DataAccess;
 using MeetingPlanner.Enums;
 using MeetingPlanner.Models;
@@ -17,6 +18,7 @@ namespace MeetingPlanner.Controllers
     public class MeetingController : BaseController
     {
         private const string MetingOwnerCookie = "MeetingOwner";
+        private const string UserNameCookie = "UserName";
         //
         // GET: /Meeting/
         public ActionResult New(string description)
@@ -44,6 +46,9 @@ namespace MeetingPlanner.Controllers
             {
                 using (var container = new MeetingPlannerContainer())
                 {
+                    var userNameCookie = Request.Cookies[UserNameCookie];
+                    if (userNameCookie != null)
+                        model.UserName = HttpUtility.UrlDecode(userNameCookie.Value);
                     var meeting = container.MeetingSet.FirstOrDefault(m => m.Id == id.Value);
                     if (meeting != null)
                     {
@@ -90,6 +95,8 @@ namespace MeetingPlanner.Controllers
                             container.SaveChanges();
                         }
                         userId = user.Id;
+
+                        Response.Cookies.Add(new HttpCookie(UserNameCookie, HttpUtility.UrlEncode(userName)));
                     }
 
                     var voteCookieName = GetVoteCookieName(meetingId);
