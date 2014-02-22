@@ -135,7 +135,7 @@ namespace MeetingPlanner.Controllers
                         {
                             MeetingId = meetingId,
                             IsAvaliable = isAvaliable,
-                            Date = day,
+                            Date = new DateTime(day.Ticks, DateTimeKind.Utc),
                             CachedUserNamesId = userId
                         };
                     container.UserMeetingDatesSet.Add(entity);
