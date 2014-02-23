@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/16/2014 23:29:12
+-- Date Created: 02/23/2014 18:56:42
 -- Generated from EDMX file: C:\Projects\MeetingPlanner\DataAccess\MeetingPlanner.edmx
 -- --------------------------------------------------
 
@@ -35,6 +35,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MeetingMembersUserProfile]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MeetingMembersSet] DROP CONSTRAINT [FK_MeetingMembersUserProfile];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CachedUserNameUserMeetingDates]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserMeetingDatesSet] DROP CONSTRAINT [FK_CachedUserNameUserMeetingDates];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -64,6 +67,9 @@ GO
 IF OBJECT_ID(N'[dbo].[webpages_Roles]', 'U') IS NOT NULL
     DROP TABLE [dbo].[webpages_Roles];
 GO
+IF OBJECT_ID(N'[dbo].[CachedUserNames]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CachedUserNames];
+GO
 IF OBJECT_ID(N'[dbo].[webpages_UsersInRoles]', 'U') IS NOT NULL
     DROP TABLE [dbo].[webpages_UsersInRoles];
 GO
@@ -77,7 +83,8 @@ CREATE TABLE [dbo].[MeetingSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [MeetingStatusId] int  NOT NULL,
     [UserProfileId] int  NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [Description] nvarchar(max)  NOT NULL,
+    [RowVersion] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -103,7 +110,7 @@ CREATE TABLE [dbo].[UserMeetingDatesSet] (
     [MeetingId] int  NOT NULL,
     [IsAvaliable] bit  NOT NULL,
     [UserProfileId] int  NULL,
-    [CachedUserNamesId] int  NULL
+    [CachedUserNameId] int  NULL
 );
 GO
 
@@ -304,6 +311,20 @@ ADD CONSTRAINT [FK_MeetingMembersUserProfile]
 CREATE INDEX [IX_FK_MeetingMembersUserProfile]
 ON [dbo].[MeetingMembersSet]
     ([UserProfileId]);
+GO
+
+-- Creating foreign key on [CachedUserNameId] in table 'UserMeetingDatesSet'
+ALTER TABLE [dbo].[UserMeetingDatesSet]
+ADD CONSTRAINT [FK_CachedUserNameUserMeetingDates]
+    FOREIGN KEY ([CachedUserNameId])
+    REFERENCES [dbo].[CachedUserNames]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CachedUserNameUserMeetingDates'
+CREATE INDEX [IX_FK_CachedUserNameUserMeetingDates]
+ON [dbo].[UserMeetingDatesSet]
+    ([CachedUserNameId]);
 GO
 
 -- --------------------------------------------------

@@ -29,7 +29,7 @@ namespace DataAccess
               this.Property(t => t.MeetingId).HasColumnName("MeetingId");
               this.Property(t => t.IsAvaliable).HasColumnName("IsAvaliable");
               this.Property(t => t.UserProfileId).HasColumnName("UserProfileId");
-              this.Property(t => t.CachedUserNamesId).HasColumnName("CachedUserNamesId");
+              this.Property(t => t.CachedUserNameId).HasColumnName("CachedUserNameId");
          }
     }
 }

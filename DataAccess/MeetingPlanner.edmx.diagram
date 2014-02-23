@@ -18,7 +18,8 @@
         <EntityTypeShape EntityType="MeetingPlanner.webpages_Roles" Width="1.5" PointX="12" PointY="6.625" />
         <AssociationConnector Association="MeetingPlanner.webpages_UsersInRoles" />
         <AssociationConnector Association="MeetingPlanner.MeetingMembersUserProfile" />
-        <EntityTypeShape EntityType="MeetingPlanner.CachedUserName" Width="1.5" PointX="5.125" PointY="5.375" />
+        <EntityTypeShape EntityType="MeetingPlanner.CachedUserName" Width="1.5" PointX="6" PointY="5" />
+        <AssociationConnector Association="MeetingPlanner.CachedUserNameUserMeetingDates" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

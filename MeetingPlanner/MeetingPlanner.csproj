@@ -196,6 +196,7 @@
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MeetingModel.cs" />
+    <Compile Include="Models\ResultIndexModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\SimpleDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -311,6 +312,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\results.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

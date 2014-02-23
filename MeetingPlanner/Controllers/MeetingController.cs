@@ -83,44 +83,62 @@ namespace MeetingPlanner.Controllers
         {
             if (greenDays != null || redDays != null)
             {
-                int? userId = null;
                 using (var container = new MeetingPlannerContainer())
                 {
+                    var meeting = container.MeetingSet.First(m => m.Id == meetingId);
+                    meeting.RowVersion = Guid.NewGuid();
+
+                    CachedUserName user = null;
                     if (!string.IsNullOrEmpty(userName))
                     {
-                        var user = container.CachedUserNames.FirstOrDefault(u => u.UserName == userName);
-                        if (user == null)
-                        {
-                            user = new CachedUserName {UserName = userName};
-                            container.CachedUserNames.Add(user);
-                            container.SaveChanges();
-                        }
-                        userId = user.Id;
-
-                        Response.Cookies.Add(new HttpCookie(UserNameCookie, HttpUtility.UrlEncode(userName)));
+                        user = ProcessUserName(userName, container);
                     }
 
                     var voteCookieName = GetVoteCookieName(meetingId);
                     var cookie = Request.Cookies[voteCookieName];
                     if (cookie != null)
                     {
-                        var dayIds = ParseVoteCookieAndGetIds(cookie);
-                        var days = container.UserMeetingDatesSet.Where(d => dayIds.Contains(d.Id)).ToList();
-                        days.ForEach(d => container.UserMeetingDatesSet.Remove(d));
-                        container.SaveChanges();
+                        DeleteSetBeforeDates(cookie, container);
                     }
-                    cookie = new HttpCookie(voteCookieName) { Expires = DateTime.Now.AddDays(1) };
 
-                    MakeEntityUserMeetingDay(greenDays, meetingId, container, true,userId, cookie);
-                    MakeEntityUserMeetingDay(redDays, meetingId, container, false, userId, cookie);
+                    cookie = new HttpCookie(voteCookieName) { Expires = DateTime.Now.AddDays(1) };
+                    var entities = new List<UserMeetingDates>();
+                    entities.AddRange(MakeEntityUserMeetingDay(greenDays, meetingId, container, true, user));
+                    entities.AddRange(MakeEntityUserMeetingDay(redDays, meetingId, container, false, user));
+                    
+                    container.SaveChanges();
+
+                    entities.ForEach(e => cookie[e.Id.ToString()] = null);
 
                     if (Response.Cookies[voteCookieName] != null)
                         Response.Cookies.Remove(voteCookieName);
                     Response.Cookies.Add(cookie);
+
+                    
                 }
             }
 
             return Json(SaveResult.Ok);
+        }
+
+        private void DeleteSetBeforeDates(HttpCookie cookie, MeetingPlannerContainer container)
+        {
+            var dayIds = ParseVoteCookieAndGetIds(cookie);
+            var days = container.UserMeetingDatesSet.Where(d => dayIds.Contains(d.Id)).ToList();
+            days.ForEach(d => container.UserMeetingDatesSet.Remove(d));
+        }
+
+        private CachedUserName ProcessUserName(string userName, MeetingPlannerContainer container)
+        {
+            var user = container.CachedUserNames.FirstOrDefault(u => u.UserName == userName);
+            if (user == null)
+            {
+                user = new CachedUserName {UserName = userName};
+                container.CachedUserNames.Add(user);
+            }
+
+            Response.Cookies.Add(new HttpCookie(UserNameCookie, HttpUtility.UrlEncode(userName)));
+            return user;
         }
 
         private string GetVoteCookieName(int meetingId)
@@ -133,8 +151,9 @@ namespace MeetingPlanner.Controllers
             return (cookie.Values.Cast<object>().Select(value => Int32.Parse(value.ToString()))).ToList();
         }
 
-        private static void MakeEntityUserMeetingDay(DateTime[] days, int meetingId, MeetingPlannerContainer container, bool isAvaliable, int? userId, HttpCookie cookie)
+        private List<UserMeetingDates> MakeEntityUserMeetingDay(DateTime[] days, int meetingId, MeetingPlannerContainer container, bool isAvaliable, CachedUserName user)
         {
+            var result = new List<UserMeetingDates>();
             if (days != null)
             {
                 foreach (var day in days)
@@ -144,13 +163,13 @@ namespace MeetingPlanner.Controllers
                             MeetingId = meetingId,
                             IsAvaliable = isAvaliable,
                             Date = DateTimeHelper.ConvertToUtc(day),
-                            CachedUserNamesId = userId
+                            CachedUserName = user
                         };
                     container.UserMeetingDatesSet.Add(entity);
-                    container.SaveChanges();
-                    cookie[entity.Id.ToString()] = null;
+                    result.Add(entity);
                 }
             }
+            return result;
         }
     }
 }
