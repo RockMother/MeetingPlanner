@@ -32,7 +32,7 @@
             </div>
             <div  class="float-right">
                 <label id="lblEnterName">@Edit.YourName</label>
-                <input type="text" id="UserName" class="input-sm" value="@Model.UserName"/>
+                <input type="text" id="UserName" class="input-sm"/>
                 <button id="sendButton" class="btn btn-default" onclick="selector.sendClicked()">@Edit.SendButton</button>
             </div>
         </div>
@@ -61,13 +61,13 @@
                 {
                 <text>
                 dayRender: function (date, cell) {
-                    var isoDate = date.toISOString();
+                    var strDate = date.toDateString();
                     @foreach (var value in Model.MarkedDays)
                     {
                         <text>
-                    if (isoDate == new Date( @value.Key.Year, @value.Key.Month - 1, @value.Key.Day).toISOString())
+                    if (strDate == new Date( @value.Key.Year, @value.Key.Month - 1, @value.Key.Day).toDateString())
                     {
-                        cells[isoDate] = {
+                        cells[strDate] = {
                             cell: cell, 
                             isAvaliable: @value.Value.ToString().ToLower(),
                             date: date
@@ -84,9 +84,9 @@
                 dayNamesShort: fullCalendarLocalizedDefaults.dayNamesShort,
                 buttonText: fullCalendarLocalizedDefaults.buttonText
             });
-            for(var isoDate in cells) {
-                var obj = cells[isoDate];
-                selector.markDate(obj.date, isoDate, obj.isAvaliable, obj.cell);
+            for(var date in cells) {
+                var obj = cells[date];
+                selector.markDate(obj.date, obj.isAvaliable, obj.cell);
             }
         });
     </script>

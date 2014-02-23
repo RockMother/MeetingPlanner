@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using DataAccess;
 using MeetingPlanner.Enums;
+using MeetingPlanner.Helpers;
 using MeetingPlanner.Models;
 using MeetingPlanner.Resources.Controllers.Result;
 
@@ -32,7 +33,7 @@ namespace MeetingPlanner.Controllers
 
                     foreach (var userDate in userDates)
                     {
-                        string date = userDate.userDate.Date.ToShortDateString();
+                        string date = DateTimeHelper.ConvertToUtc(userDate.userDate.Date).ToShortDateString();
                         string userName = userDate.userName;
                         if (!model.Results.ContainsKey(date))
                             model.Results.Add(date, new ResultModel.DateCount());

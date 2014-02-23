@@ -10,6 +10,7 @@ using System.Web.Security;
 using System.Web.Util;
 using DataAccess;
 using MeetingPlanner.Enums;
+using MeetingPlanner.Helpers;
 using MeetingPlanner.Models;
 using UserProfile = DataAccess.UserProfile;
 
@@ -142,7 +143,7 @@ namespace MeetingPlanner.Controllers
                         {
                             MeetingId = meetingId,
                             IsAvaliable = isAvaliable,
-                            Date = new DateTime(day.Ticks, DateTimeKind.Utc),
+                            Date = DateTimeHelper.ConvertToUtc(day),
                             CachedUserNamesId = userId
                         };
                     container.UserMeetingDatesSet.Add(entity);

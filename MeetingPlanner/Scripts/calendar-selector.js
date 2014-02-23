@@ -16,11 +16,11 @@ calendarSelector = function () {
 
     this.dayClicked = function (date, allDay, jsEvent, view) {
         var avaliableDates = $avaliableDates.is(':checked');
-        var isoDate = date.toISOString();
-        self.markDate(date, isoDate, avaliableDates, $(this));
+        self.markDate(date, avaliableDates, $(this));
     };
 
-    this.markDate = function (date, isoDate, isAvaliable, cell) {
+    this.markDate = function (date, isAvaliable, cell) {
+        var strDate = date.toDateString();
         if (greenDays[date] && isAvaliable) {
             greenDays[date] = null;
             cell.css('background-color', '');
@@ -29,12 +29,12 @@ calendarSelector = function () {
             cell.css('background-color', '');
         } else {
             if (isAvaliable) {
-                greenDays[date] = isoDate;
+                greenDays[date] = strDate;
                 redDays[date] = null;
                 cell.css('background-color', 'green');
             } else {
                 greenDays[date] = null;
-                redDays[date] = isoDate;
+                redDays[date] = strDate;
                 cell.css('background-color', '#E96A6D');
             }
         }
