@@ -1,16 +1,18 @@
 ﻿@using System.Web.UI.WebControls
+@using MeetingPlanner.Resources.Views.Result
 @model MeetingPlanner.Models.ResultIndexModel
 @{
     ViewBag.Title = "title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Html.Hidden("meetingId", Model.MeetingId);
-@Html.Hidden("rowVersion", Model.RowVersion);
+@Html.Hidden("meetingId", Model.MeetingId)
+@Html.Hidden("rowVersion", Model.RowVersion)
 <div style="text-align: center">
     <h3 id="message">
     </h3>
 </div>
 <div id='chartResults'></div>
+@Html.ActionLink(Index.revoteButton, "Edit", "Meeting", new { id = Model.MeetingId }, new {@class = "btn btn-default"})
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/chart/jquery.jqplot.min.js")"></script>
