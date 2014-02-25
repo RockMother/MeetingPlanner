@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CountResult" xml:space="preserve">
-    <value>Предлагаю встретится {0}, это устроит большинство.</value>
+    <value>Давайте встретимся {0}, это устроит большинство.</value>
   </data>
   <data name="PleaseReloadLater" xml:space="preserve">
     <value>Пожалуйста, обновите страницу позже, результат появится, когда создатель встречи отправит запрос на расчет</value>

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Convenient" xml:space="preserve">
-    <value>Удобно</value>
+    <value>Я могу</value>
   </data>
   <data name="CountButton" xml:space="preserve">
     <value>Расчитать</value>
@@ -127,19 +127,20 @@
     <value>Перейти к результатам</value>
   </data>
   <data name="Inconvenient" xml:space="preserve">
-    <value>Неудобно</value>
+    <value>Я не могу</value>
   </data>
   <data name="PleaseSelectDays" xml:space="preserve">
-    <value>Пожалуйста выберите удобные и неудобные для вас дни, после чего нажмите кнопку отправить</value>
+    <value>Указите даты, когда вы можете встретиться и когда заняты, после чего нажмите кнопку Проголосовать</value>
   </data>
   <data name="SendButton" xml:space="preserve">
-    <value>Отправить</value>
+    <value>Проголосовать</value>
   </data>
   <data name="SendNumerToFriends" xml:space="preserve">
-    <value>Отправьте другим участникам номер встречи, чтобы они могли присоединиться к планированию</value>
+    <value>Отправьте вашим друзьям номер встречи, чтобы они могли присоединиться к планированию</value>
   </data>
   <data name="SomeBodeCreatesMeeting" xml:space="preserve">
-    <value>Кто-то из ваших друзей запланировал встречу</value>
+    <value>Встречаемся! 
+Кто-то из ваших друзей предлагает встретиться</value>
   </data>
   <data name="SorryNoMeeting" xml:space="preserve">
     <value>Простите, но такой встречи никто не планирует</value>

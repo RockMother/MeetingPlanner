@@ -118,33 +118,34 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Convenient" xml:space="preserve">
-    <value>Convenient</value>
+    <value>I can</value>
   </data>
   <data name="CountButton" xml:space="preserve">
     <value>Count</value>
   </data>
   <data name="GoToResult" xml:space="preserve">
-    <value>Switch to results</value>
+    <value>Proceed to results</value>
   </data>
   <data name="Inconvenient" xml:space="preserve">
-    <value>Inconvenient</value>
+    <value>I can't</value>
   </data>
   <data name="PleaseSelectDays" xml:space="preserve">
-    <value>Please select a convenient and inconvenient for you days, and then click the send button</value>
+    <value>Select dates, when you are ready meet, and dates, when you are already occupied, and click Vote.</value>
   </data>
   <data name="SendButton" xml:space="preserve">
-    <value>Send</value>
+    <value>Vote</value>
   </data>
   <data name="SendNumerToFriends" xml:space="preserve">
-    <value>Send to other participants of the meeting room, so that they can join the planning</value>
+    <value>To invite your friends to the meeting send them the meeting ID - </value>
   </data>
   <data name="SomeBodeCreatesMeeting" xml:space="preserve">
-    <value>One of your friends had planned a meeting</value>
+    <value>Let's meet!
+nOne of your friends has planned a meeting</value>
   </data>
   <data name="SorryNoMeeting" xml:space="preserve">
-    <value>Sorry, but no such meeting planned</value>
+    <value>Sorry, there is no meeting planned with this ID.</value>
   </data>
   <data name="YourName" xml:space="preserve">
-    <value>Enter your name(not necessarily)</value>
+    <value>Enter your name (optional)</value>
   </data>
 </root>

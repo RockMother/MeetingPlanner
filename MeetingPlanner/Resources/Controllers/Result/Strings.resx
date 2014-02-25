@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CountResult" xml:space="preserve">
-    <value>Offered meet {0}, it will suit most.</value>
+    <value>Let's meet on {0}, this date suits most of us.</value>
   </data>
   <data name="PleaseReloadLater" xml:space="preserve">
-    <value>Please reload the page later, the result will be, when the creator of the meeting will send a request for count</value>
+    <value>Refresh the page later, the result will be calculated when the meeting's creator will send a request for count</value>
   </data>
 </root>

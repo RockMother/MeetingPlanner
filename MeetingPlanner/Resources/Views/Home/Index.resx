@@ -124,19 +124,21 @@
     <value>Create</value>
   </data>
   <data name="CreateMeetingButton" xml:space="preserve">
-    <value>Create meeting</value>
+    <value>Let's meet!</value>
   </data>
   <data name="CreateMeetingModalTitle" xml:space="preserve">
-    <value>Creating meeting</value>
+    <value>Meeting details</value>
   </data>
   <data name="CreateNewMeeting" xml:space="preserve">
-    <value>You can create new meeting</value>
+    <value>You can create a new meeting</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>This application will allow you and your friends to choose the most convenient day for a meeting.</value>
+    <value>Got some free time?
+Want to meet your friends?
+The Meeting Planner helps you and your friends to choose the most convenient day for a meeting.</value>
   </data>
   <data name="InputMeetingDescription" xml:space="preserve">
-    <value>Please, input meeting description:</value>
+    <value>Please, input a meeting description:</value>
   </data>
   <data name="JoinMeetingButton" xml:space="preserve">
     <value>Join</value>
@@ -145,7 +147,7 @@
     <value>Meeting number</value>
   </data>
   <data name="OrJoinExists" xml:space="preserve">
-    <value>or join to existing meeting</value>
+    <value>or join existing meeting</value>
   </data>
   <data name="WelcomeHeader" xml:space="preserve">
     <value>Welcome to the Meeting planner</value>

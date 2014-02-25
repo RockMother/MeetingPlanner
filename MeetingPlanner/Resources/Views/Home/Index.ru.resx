@@ -124,16 +124,18 @@
     <value>Создать</value>
   </data>
   <data name="CreateMeetingButton" xml:space="preserve">
-    <value>Создать встречу</value>
+    <value>Назначить встречу</value>
   </data>
   <data name="CreateMeetingModalTitle" xml:space="preserve">
-    <value>Создание встречи</value>
+    <value>Информация о встрече</value>
   </data>
   <data name="CreateNewMeeting" xml:space="preserve">
-    <value>Вы можете создать новую встречу</value>
+    <value>Назначь новую встречу</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Данное приложение позволит вам и вашим друзьям выбрать наиболее удобный день для встречи.</value>
+    <value>Много свобоного времени?
+Хочешь встретиться с друзьями?
+Meeting Planner поможет тебе и твоим друзьям выбрать удобный день для встречи.</value>
   </data>
   <data name="InputMeetingDescription" xml:space="preserve">
     <value>Пожалуйста, введите описание встречи:</value>
@@ -145,9 +147,9 @@
     <value>Номер встречи</value>
   </data>
   <data name="OrJoinExists" xml:space="preserve">
-    <value>или присоединиться к существующей встрече</value>
+    <value>или присоединяйся к существующей встрече</value>
   </data>
   <data name="WelcomeHeader" xml:space="preserve">
-    <value>Добро пожаловать в планировщик встреч.</value>
+    <value>Добро пожаловать в Meeting Planner.</value>
   </data>
 </root>

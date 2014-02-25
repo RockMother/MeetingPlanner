@@ -9,13 +9,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATJ8ifg3C902x1ndEYAoNlwAAAAACAAAAAAAQZgAAAAEAACAAAAC3ccc1Uz4W3hRYcKTmtySienSijrqIDBh8zbPLGjpabwAAAAAOgAAAAAIAACAAAAAgB6C6ob5rZ6u01RX+UCMqr91kM+k87+Vv7EWjYgTnZSAAAAAVJ2fqvYnQdJuyEhncjB6GDa6hLZjl24T18ioP2oQ3xUAAAADrqjdtkX8XNpVbKai27glQbYhHfje0NpxYREzLQLJl7nXG3SIDb5UT3EOPUV94SLTMuu/LB+ejuQAeLBwKCgeX</EncryptedPassword>
+    <_PublishTargetUrl>ftp://MeetingPlanner.somee.com/www.MeetingPlanner.somee.com</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/15/2014 00:45:51</publishTime>
     </File>
     <File Include="bin/DataAccess.dll">
-      <publishTime>02/17/2014 02:24:23</publishTime>
+      <publishTime>02/23/2014 20:10:20</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>02/15/2014 00:45:00</publishTime>
@@ -93,7 +94,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:45:43</publishTime>
     </File>
     <File Include="bin/MeetingPlanner.dll">
-      <publishTime>02/23/2014 15:16:48</publishTime>
+      <publishTime>02/26/2014 00:16:21</publishTime>
     </File>
     <File Include="bin/Microsoft.Data.Edm.dll">
       <publishTime>02/15/2014 00:45:02</publishTime>
@@ -114,7 +115,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:45:31</publishTime>
     </File>
     <File Include="bin/ru/MeetingPlanner.resources.dll">
-      <publishTime>02/23/2014 15:16:48</publishTime>
+      <publishTime>02/26/2014 00:16:21</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
       <publishTime>02/15/2014 00:45:03</publishTime>
@@ -515,6 +516,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>02/15/2014 00:44:03</publishTime>
     </File>
+    <File Include="Scripts/results.js">
+      <publishTime>02/23/2014 19:33:53</publishTime>
+    </File>
     <File Include="Scripts/_references.js">
       <publishTime>02/15/2014 00:44:03</publishTime>
     </File>
@@ -549,13 +553,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 20:07:13</publishTime>
     </File>
     <File Include="Views/Meeting/Edit.cshtml">
-      <publishTime>02/23/2014 15:16:27</publishTime>
+      <publishTime>02/25/2014 00:53:45</publishTime>
     </File>
     <File Include="Views/Meeting/New.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Views/Result/Index.cshtml">
-      <publishTime>02/17/2014 22:00:30</publishTime>
+      <publishTime>02/25/2014 00:50:06</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>02/15/2014 00:44:06</publishTime>
@@ -573,7 +577,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/15/2014 00:44:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/23/2014 15:16:53</publishTime>
+      <publishTime>02/24/2014 10:35:55</publishTime>
     </File>
   </ItemGroup>
 </Project>
