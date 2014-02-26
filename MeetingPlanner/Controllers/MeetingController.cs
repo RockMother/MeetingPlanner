@@ -29,7 +29,9 @@ namespace MeetingPlanner.Controllers
                 var newMeeting = new Meeting()
                 {
                     Description = description,
-                    MeetingStatusId = 1
+                    MeetingStatusId = 1,
+                    From = from,
+                    To = to,
                 };
                 container.MeetingSet.Add(newMeeting);
                 container.SaveChanges();
@@ -55,6 +57,8 @@ namespace MeetingPlanner.Controllers
                     {
                         model.Description = meeting.Description;
                         model.MeetingId = meeting.Id;
+                        model.From = meeting.From;
+                        model.To = meeting.To;
                         var ownerCookie = Request.Cookies[MetingOwnerCookie];
                         if (ownerCookie != null)
                         {

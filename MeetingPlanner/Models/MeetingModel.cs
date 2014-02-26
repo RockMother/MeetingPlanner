@@ -12,5 +12,8 @@ namespace MeetingPlanner.Models
         public int MeetingId { get; set; }
         public Dictionary<DateTime, bool> MarkedDays { get; set; }
         public string UserName { get; set; }
+
+        public DateTime? From { get; set; }
+        public DateTime? To { get; set; }
     }
 }

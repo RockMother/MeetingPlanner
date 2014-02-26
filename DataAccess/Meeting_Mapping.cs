@@ -29,6 +29,8 @@ namespace DataAccess
               this.Property(t => t.UserProfileId).HasColumnName("UserProfileId");
               this.Property(t => t.Description).HasColumnName("Description").IsRequired();
               this.Property(t => t.RowVersion).HasColumnName("RowVersion");
+              this.Property(t => t.From).HasColumnName("From");
+              this.Property(t => t.To).HasColumnName("To");
          }
     }
 }

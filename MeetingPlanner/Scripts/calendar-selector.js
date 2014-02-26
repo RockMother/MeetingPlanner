@@ -26,17 +26,39 @@ calendarSelector = function () {
         cell.css('background-color', '');
     };
 
+    function markCellDisabled(cell) {
+        cell.css('background-color', '#D2D2D2');
+    }
+
     this.dayClicked = function (date, allDay, jsEvent, view) {
-        var avaliableDates = $avaliableDates.is(':checked');
-        self.markDate(date, avaliableDates, $(this));
+        if (self.dateEnabled(date)) {
+            var avaliableDates = $avaliableDates.is(':checked');
+            self.markDate(date, avaliableDates, $(this));
+        }
     };
 
-    this.dayRender = function(date, cell) {
-        if (greenDays[date]) {
-            markCellGreen(cell);
+    this.dateEnabled = function (date) {
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+        var moreThanFrom = !selector.dateFrom || (date.valueOf() > selector.dateFrom.valueOf());
+        var lessThanTo = !selector.dateTo || (date.valueOf() < selector.dateTo.valueOf());
+        if (moreThanFrom && lessThanTo && date.valueOf() >= now.valueOf()) {
+            return true;
+        } else {
+            return false;
         }
-        if (redDays[date]) {
-            markCellRed(cell);
+    };
+
+    this.dayRender = function (date, cell) {
+        if (self.dateEnabled(date)) {
+            if (greenDays[date]) {
+                markCellGreen(cell);
+            }
+            if (redDays[date]) {
+                markCellRed(cell);
+            }
+        } else {
+            markCellDisabled(cell);
         }
     };
 

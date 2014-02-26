@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/23/2014 18:56:42
+-- Date Created: 02/27/2014 00:36:12
 -- Generated from EDMX file: C:\Projects\MeetingPlanner\DataAccess\MeetingPlanner.edmx
 -- --------------------------------------------------
 
@@ -84,7 +84,9 @@ CREATE TABLE [dbo].[MeetingSet] (
     [MeetingStatusId] int  NOT NULL,
     [UserProfileId] int  NULL,
     [Description] nvarchar(max)  NOT NULL,
-    [RowVersion] uniqueidentifier  NOT NULL
+    [RowVersion] uniqueidentifier  NOT NULL,
+    [From] datetime  NULL,
+    [To] datetime  NULL
 );
 GO
 

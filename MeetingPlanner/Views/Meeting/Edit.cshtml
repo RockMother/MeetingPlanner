@@ -58,8 +58,14 @@
 
                 }
             }
-
-
+            @if (@Model.From.HasValue)
+            {
+                @:selector.dateFrom = new Date(@Model.From.Value.Year, @Model.From.Value.Month - 1, @Model.From.Value.Day);
+            }
+             @if (@Model.To.HasValue)
+            {
+                @:selector.dateTo = new Date(@Model.To.Value.Year, @Model.To.Value.Month - 1, @Model.To.Value.Day);
+            }
             var calendar = $('#calendar').fullCalendar({
                 editable: true,
                 //header: {

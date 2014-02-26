@@ -20,6 +20,8 @@ namespace DataAccess
         public Nullable<int> UserProfileId { get; set; }
         public string Description { get; set; }
         public System.Guid RowVersion { get; set; }
+        public Nullable<System.DateTime> From { get; set; }
+        public Nullable<System.DateTime> To { get; set; }
     
         public virtual MeetingStatus MeetingStatus { get; set; }
     }
