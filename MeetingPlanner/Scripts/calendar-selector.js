@@ -14,30 +14,61 @@ calendarSelector = function () {
         return $('#UserName').val();
     }
 
+    function markCellRed(cell) {
+        cell.css('background-color', '#E96A6D');
+    }
+    
+    function markCellGreen(cell) {
+        cell.css('background-color', 'green');
+    }
+
+    function resetCellColor(cell) {
+        cell.css('background-color', '');
+    };
+
     this.dayClicked = function (date, allDay, jsEvent, view) {
         var avaliableDates = $avaliableDates.is(':checked');
         self.markDate(date, avaliableDates, $(this));
     };
 
+    this.dayRender = function(date, cell) {
+        if (greenDays[date]) {
+            markCellGreen(cell);
+        }
+        if (redDays[date]) {
+            markCellRed(cell);
+        }
+    };
+
     this.markDate = function (date, isAvaliable, cell) {
-        var strDate = date.toDateString();
         if (greenDays[date] && isAvaliable) {
             greenDays[date] = null;
-            cell.css('background-color', '');
+            resetCellColor(cell);
         } else if (redDays[date] && !isAvaliable) {
             redDays[date] = null;
-            cell.css('background-color', '');
+            resetCellColor(cell);
         } else {
             if (isAvaliable) {
-                greenDays[date] = strDate;
+                self.addGreenDay(date);;
                 redDays[date] = null;
-                cell.css('background-color', 'green');
+                markCellGreen(cell);
             } else {
                 greenDays[date] = null;
-                redDays[date] = strDate;
-                cell.css('background-color', '#E96A6D');
+                self.addRedDay(date);
+                markCellRed(cell);
             }
         }
+    };
+
+    this.addGreenDay = function(date) {
+        greenDays[date] = date.toDateString();
+    };
+    this.addRedDay = function (date) {
+        redDays[date] = date.toDateString();
+    };
+
+    this.monthChanged = function (e) {
+        $('#calendar').fullCalendar('render');
     };
 
     this.sendForCount = function() {

@@ -45,8 +45,22 @@
     <script>
         $(document).ready(function () {
             selector = new calendarSelector();
-            var cells = [];
-            $('#calendar').fullCalendar({
+            @if (Model.MarkedDays != null && Model.MarkedDays.Count > 0)
+            {
+                foreach (var value in Model.MarkedDays)
+                {
+                    <text>
+                    if (@value.Value)
+                        selector.addGreenDay(new Date( @value.Key.Year, @value.Key.Month - 1, @value.Key.Day));
+                    else
+                        selector.addRedDay(new Date( @value.Key.Year, @value.Key.Month - 1, @value.Key.Day));
+                    </text>
+
+                }
+            }
+
+
+            var calendar = $('#calendar').fullCalendar({
                 editable: true,
                 //header: {
                 //    left: 'prev,next today',
@@ -57,37 +71,17 @@
                 height: 320,
                 width: 480,
                 dayClick: selector.dayClicked,
-                @if (Model.MarkedDays != null && Model.MarkedDays.Count > 0)
-                {
-                <text>
-                dayRender: function (date, cell) {
-                    var strDate = date.toDateString();
-                    @foreach (var value in Model.MarkedDays)
-                    {
-                        <text>
-                    if (strDate == new Date( @value.Key.Year, @value.Key.Month - 1, @value.Key.Day).toDateString())
-                    {
-                        cells[strDate] = {
-                            cell: cell, 
-                            isAvaliable: @value.Value.ToString().ToLower(),
-                            date: date
-                            };
-                    }
-                        </text>
-                    }        
-                }, 
-                </text>
-                }
+                dayRender:  selector.dayRender,
                 monthNames: fullCalendarLocalizedDefaults.monthNames,
                 monthNamesShort: fullCalendarLocalizedDefaults.monthNamesShort,
                 dayNames: fullCalendarLocalizedDefaults.dayNames,
                 dayNamesShort: fullCalendarLocalizedDefaults.dayNamesShort,
                 buttonText: fullCalendarLocalizedDefaults.buttonText
             });
-            for(var date in cells) {
-                var obj = cells[date];
-                selector.markDate(obj.date, obj.isAvaliable, obj.cell);
-            }
+
+            $('#calendar').on('click','.fc-button-next', calendar, selector.monthChanged);
+            $('#calendar').on('click','.fc-button-prev', calendar, selector.monthChanged);
+            
         });
     </script>
 
