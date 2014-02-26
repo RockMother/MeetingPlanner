@@ -1,4 +1,5 @@
-﻿@using MeetingPlanner.Resources.Views.Home
+﻿@using System.Globalization
+@using MeetingPlanner.Resources.Views.Home
 
 
 @{
@@ -34,8 +35,17 @@
                 <h4 class="modal-title" id="myModalLabel">@Index.CreateMeetingModalTitle</h4>
             </div>
             <div class="modal-body">
-                <label for="meetingDescription" class="control-label">@Index.InputMeetingDescription </label>
-                <input type="text" class="input-sm" style="width: 100%" id="meetingDescription">
+                <div class="container" style="width: 100%">
+                    <label for="meetingDescription" class="control-label">@Index.InputMeetingDescription </label>
+                    <input type="text" class="input-sm" style="width: 100%" id="meetingDescription">
+                </div>
+                <br>
+                <div class="container" style="width: 100%">
+                    <label for="from">From</label>
+                    <input type="text" id="from" style="width: 20%" name="from">
+                    <label for="to">to</label>
+                    <input type="text" id="to" style="width: 20%" name="to">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">@Index.CancelButton</button>
@@ -45,12 +55,72 @@
     </div>
 </div>
 
+<style>
+.datepicker{z-index:1151;}
+</style>
 
+@{
+    var lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var currentDateFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+    if (lang == "ru")
+    {
+        currentDateFormat = currentDateFormat.Replace("MM", "mm");
+    }
 
+}
 
 <script>
-    function homePageCreateMeetengClicked() {
+    $(document).ready(function () {
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+        var from = $("#from").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 3,
+            onRender: function(date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            },
+            @if (lang == "ru")
+            {
+                @:format:'@currentDateFormat',
+            }
+            autoclose: true,
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+            }
+        }).on('changeDate', function (ev) {
+            if ($('#to').val() && ev.date.valueOf() > to.date.valueOf()) {
+                var newDate = new Date(ev.date);
+                newDate.setDate(newDate.getDate() + 1);
+                to.setValue(newDate);
+            }
 
+            $(this).blur();
+            $(this).datepicker('hide');
+        }).data('datepicker');
+        var to = $("#to").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 3,
+            onRender: function(date) {
+                return date.valueOf() <= from.date.valueOf() ? 'disabled' : '';
+            },
+            @if (lang == "ru")
+            {
+                @:format: '@currentDateFormat',
+            }
+            autoclose: true ,
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+            }
+        }).on('changeDate', function (ev) {
+            $(this).blur();
+            $(this).datepicker('hide');
+        }).data('datepicker');
+    });
+
+
+    function homePageCreateMeetengClicked() {
         var meetingDescription = $('#meetingDescription').val();
         var url = "@Url.Action("New", "Meeting")";
         if (meetingDescription != null) {
@@ -59,6 +129,8 @@
                 url: url,
                 data: JSON.stringify({
                     description: meetingDescription,
+                    from: $('#from').data('datepicker').date.toDateString(),
+                    to: $('#to').data('datepicker').date.toDateString(),
                 }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"

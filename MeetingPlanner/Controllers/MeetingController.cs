@@ -22,7 +22,7 @@ namespace MeetingPlanner.Controllers
         private const string UserNameCookie = "UserName";
         //
         // GET: /Meeting/
-        public ActionResult New(string description)
+        public ActionResult New(string description, DateTime? from, DateTime? to)
         {
             using (var container = new MeetingPlannerContainer())
             {

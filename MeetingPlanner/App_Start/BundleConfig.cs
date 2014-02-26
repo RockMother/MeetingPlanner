@@ -12,7 +12,7 @@ namespace MeetingPlanner
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                        "~/Scripts/jquery-ui-{version}.custom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -20,7 +20,8 @@ namespace MeetingPlanner
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
             "~/Scripts/bootstrap/bootstrap.js",
-            "~/Scripts/bootstrap/bootstrap.min.js"));
+            "~/Scripts/bootstrap/bootstrap.min.js",
+             "~/Scripts/bootstrap/bootstrap-datepicker.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -32,7 +33,8 @@ namespace MeetingPlanner
                 "~/Content/bootstrap/bootstrap-theme.css",
                 "~/Content/bootstrap/bootstrap-theme.min.css",
                 "~/Content/bootstrap/bootstrap.css",
-                "~/Content/bootstrap/bootstrap.min.css"
+                "~/Content/bootstrap/bootstrap.min.css",
+                "~/Content/bootstrap/datepicker.css"
                 ));
         }
     }
