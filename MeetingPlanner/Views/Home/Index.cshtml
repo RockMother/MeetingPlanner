@@ -124,13 +124,25 @@
         var meetingDescription = $('#meetingDescription').val();
         var url = "@Url.Action("New", "Meeting")";
         if (meetingDescription != null) {
+            var dateFrom;
+            var dateTo;
+            if ($('#from').val())
+                dateFrom = $('#from').data('datepicker').date.toDateString();
+            else
+                dateFrom = null;
+
+            if ($('#to').val())
+                dateTo = $('#to').data('datepicker').date.toDateString();
+            else
+                dateTo = null;
+
             $.ajax({
                 type: "POST",
                 url: url,
                 data: JSON.stringify({
                     description: meetingDescription,
-                    from: $('#from').data('datepicker').date.toDateString(),
-                    to: $('#to').data('datepicker').date.toDateString(),
+                    from: dateFrom,
+                    to: dateTo,
                 }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"

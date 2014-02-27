@@ -40,8 +40,8 @@ calendarSelector = function () {
     this.dateEnabled = function (date) {
         var nowTemp = new Date();
         var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-        var moreThanFrom = !selector.dateFrom || (date.valueOf() > selector.dateFrom.valueOf());
-        var lessThanTo = !selector.dateTo || (date.valueOf() < selector.dateTo.valueOf());
+        var moreThanFrom = !selector.dateFrom || (date.valueOf() >= selector.dateFrom.valueOf());
+        var lessThanTo = !selector.dateTo || (date.valueOf() <= selector.dateTo.valueOf());
         if (moreThanFrom && lessThanTo && date.valueOf() >= now.valueOf()) {
             return true;
         } else {

@@ -49,20 +49,22 @@
             {
                 foreach (var value in Model.MarkedDays)
                 {
-                    <text>
-                    if (@value.Value)
-                        selector.addGreenDay(new Date( @value.Key.Year, @value.Key.Month - 1, @value.Key.Day));
+                    if (value.Value)
+                    {
+                        @:selector.addGreenDay(new Date(@value.Key.Year, @value.Key.Month - 1, @value.Key.Day));
+                    }
                     else
-                        selector.addRedDay(new Date( @value.Key.Year, @value.Key.Month - 1, @value.Key.Day));
-                    </text>
+                    {
+                        @:selector.addRedDay(new Date(@value.Key.Year, @value.Key.Month - 1, @value.Key.Day));
+                    }
 
                 }
             }
-            @if (@Model.From.HasValue)
+            @if (Model.From.HasValue)
             {
                 @:selector.dateFrom = new Date(@Model.From.Value.Year, @Model.From.Value.Month - 1, @Model.From.Value.Day);
             }
-             @if (@Model.To.HasValue)
+            @if (Model.To.HasValue)
             {
                 @:selector.dateTo = new Date(@Model.To.Value.Year, @Model.To.Value.Month - 1, @Model.To.Value.Day);
             }
