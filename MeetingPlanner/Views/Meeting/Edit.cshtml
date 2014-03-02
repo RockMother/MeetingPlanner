@@ -5,9 +5,15 @@
     ViewBag.Title = @Model.Description;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<form name="ignore_me">
+    <input type="hidden" id="page_is_dirty" name="page_is_dirty" value="0" />
+</form>
+<script>
+    var dirty_bit = document.getElementById('page_is_dirty');
+    if (dirty_bit.value == '1') window.location.reload();
+</script>
 @if (Model != null && Model.MeetingId > 0)
 {
-    @Html.HiddenFor(m => m.MeetingId);
     <div class="container">
         <div style="text-align: center">
             @if (Model.IsOwner)
@@ -41,10 +47,12 @@
     <div id ="resultLink" style="text-align: center; display: none">
         <button class="btn btn-default" onclick="selector.gotoResult()">@Edit.GoToResult</button>
     </div>
-    
     <script>
         $(document).ready(function () {
+            dirty_bit.value = '1';
+            
             selector = new calendarSelector();
+            selector.meetingId = @Model.MeetingId;
             @if (Model.MarkedDays != null && Model.MarkedDays.Count > 0)
             {
                 foreach (var value in Model.MarkedDays)
@@ -55,7 +63,7 @@
                     }
                     else
                     {
-                        @:selector.addRedDay(new Date(@value.Key.Year, @value.Key.Month - 1, @value.Key.Day));
+                         @:selector.addRedDay(new Date(@value.Key.Year, @value.Key.Month - 1, @value.Key.Day));
                     }
 
                 }
@@ -89,8 +97,29 @@
 
             $('#calendar').on('click','.fc-button-next', calendar, selector.monthChanged);
             $('#calendar').on('click','.fc-button-prev', calendar, selector.monthChanged);
-            
+
         });
+        
+        function getCookie(name) {
+            var cookie = " " + document.cookie;
+            var search = " " + name + "=";
+            var setStr = null;
+            var offset = 0;
+            var end = 0;
+            if (cookie.length > 0) {
+                offset = cookie.indexOf(search);
+                if (offset != -1) {
+                    offset += search.length;
+                    end = cookie.indexOf(";", offset)
+                    if (end == -1) {
+                        end = cookie.length;
+                    }
+                    setStr = unescape(cookie.substring(offset, end));
+                }
+            }
+            return(setStr);
+        }
+
     </script>
 
     

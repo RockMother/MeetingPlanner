@@ -1,4 +1,4 @@
-﻿var selector = null;
+﻿
 
 calendarSelector = function () {
     var self = this;
@@ -7,7 +7,7 @@ calendarSelector = function () {
     var $avaliableDates = $('#avaliable');
 
     function getMeetingId() {
-        return $('#MeetingId').val();
+        return selector.meetingId;
     }
 
     function getUserName() {
